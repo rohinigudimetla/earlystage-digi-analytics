@@ -87,6 +87,34 @@ export function CalendarBooking() {
 		}
 	}, [selectedDate]);
 
+	useEffect(() => {
+		if (selectedTime && timeSectionRef.current) {
+			setTimeout(() => {
+				const element = timeSectionRef.current;
+				if (!element) return;
+
+				// Get element position and height
+				const elementRect = element.getBoundingClientRect();
+				const elementTop = elementRect.top + window.scrollY;
+				const elementHeight = elementRect.height;
+
+				// Account for navbar height (typically 64px or 4rem)
+				const navbarHeight = 64;
+
+				// Calculate the center position accounting for navbar
+				const viewportHeight = window.innerHeight;
+				const availableHeight = viewportHeight - navbarHeight;
+				const scrollToPosition =
+					elementTop - (availableHeight / 2 - elementHeight / 2) - navbarHeight;
+
+				window.scrollTo({
+					top: scrollToPosition,
+					behavior: "smooth",
+				});
+			}, 100);
+		}
+	}, [selectedTime]);
+
 	const handleBooking = () => {
 		if (selectedDate && selectedTime) {
 			setIsBooked(true);
