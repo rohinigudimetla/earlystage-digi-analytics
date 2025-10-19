@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
 	Card,
 	CardContent,
@@ -55,8 +55,37 @@ export function CalendarBooking() {
 	const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 	const [selectedTime, setSelectedTime] = useState<string | null>(null);
 	const [isBooked, setIsBooked] = useState(false);
+	const timeSectionRef = useRef<HTMLDivElement>(null);
 
 	const availableDates = getAvailableDates();
+
+	useEffect(() => {
+		if (selectedDate && timeSectionRef.current) {
+			setTimeout(() => {
+				const element = timeSectionRef.current;
+				if (!element) return;
+
+				// Get element position and height
+				const elementRect = element.getBoundingClientRect();
+				const elementTop = elementRect.top + window.scrollY;
+				const elementHeight = elementRect.height;
+
+				// Account for navbar height (typically 64px or 4rem)
+				const navbarHeight = 64;
+
+				// Calculate the center position accounting for navbar
+				const viewportHeight = window.innerHeight;
+				const availableHeight = viewportHeight - navbarHeight;
+				const scrollToPosition =
+					elementTop - (availableHeight / 2 - elementHeight / 2) - navbarHeight;
+
+				window.scrollTo({
+					top: scrollToPosition,
+					behavior: "smooth",
+				});
+			}, 100);
+		}
+	}, [selectedDate]);
 
 	const handleBooking = () => {
 		if (selectedDate && selectedTime) {
@@ -111,7 +140,7 @@ export function CalendarBooking() {
 	}
 
 	return (
-		<Card className="border-2 border-primary/20">
+		<Card ref={timeSectionRef} className="border-2 border-primary/20">
 			<CardHeader>
 				<div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
 					<Calendar className="w-6 h-6 text-primary" />
@@ -122,58 +151,60 @@ export function CalendarBooking() {
 				</CardDescription>
 			</CardHeader>
 			<CardContent className="space-y-6">
-				{/* Date Selection */}
 				<div>
-					<h3 className="font-semibold text-foreground mb-3 flex items-center gap-2">
-						<Calendar className="w-4 h-4" />
-						Select a Date
-					</h3>
-					<div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-						{availableDates.slice(0, 9).map((date, index) => (
-							<button
-								key={index}
-								onClick={() => {
-									setSelectedDate(date);
-									setSelectedTime(null); // Reset time when date changes
-								}}
-								className={cn(
-									"p-3 rounded-lg border-2 text-sm font-medium transition-all hover:border-primary/50",
-									selectedDate?.toDateString() === date.toDateString()
-										? "border-primary bg-primary/5 text-foreground"
-										: "border-border text-muted-foreground hover:text-foreground"
-								)}
-							>
-								{formatDate(date)}
-							</button>
-						))}
-					</div>
-				</div>
-
-				{/* Time Selection */}
-				{selectedDate && (
-					<div>
+					{/* Date Selection */}
+					<div className="mb-6">
 						<h3 className="font-semibold text-foreground mb-3 flex items-center gap-2">
-							<Clock className="w-4 h-4" />
-							Select a Time
+							<Calendar className="w-4 h-4" />
+							Select a Date
 						</h3>
-						<div className="grid grid-cols-3 gap-2">
-							{timeSlots.map((time) => (
+						<div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+							{availableDates.slice(0, 9).map((date, index) => (
 								<button
-									key={time}
-									onClick={() => setSelectedTime(time)}
+									key={index}
+									onClick={() => {
+										setSelectedDate(date);
+										setSelectedTime(null); // Reset time when date changes
+									}}
 									className={cn(
 										"p-3 rounded-lg border-2 text-sm font-medium transition-all hover:border-primary/50",
-										selectedTime === time
+										selectedDate?.toDateString() === date.toDateString()
 											? "border-primary bg-primary/5 text-foreground"
 											: "border-border text-muted-foreground hover:text-foreground"
 									)}
 								>
-									{time}
+									{formatDate(date)}
 								</button>
 							))}
 						</div>
 					</div>
-				)}
+
+					{/* Time Selection */}
+					{selectedDate && (
+						<div>
+							<h3 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+								<Clock className="w-4 h-4" />
+								Select a Time
+							</h3>
+							<div className="grid grid-cols-3 gap-2">
+								{timeSlots.map((time) => (
+									<button
+										key={time}
+										onClick={() => setSelectedTime(time)}
+										className={cn(
+											"p-3 rounded-lg border-2 text-sm font-medium transition-all hover:border-primary/50",
+											selectedTime === time
+												? "border-primary bg-primary/5 text-foreground"
+												: "border-border text-muted-foreground hover:text-foreground"
+										)}
+									>
+										{time}
+									</button>
+								))}
+							</div>
+						</div>
+					)}
+				</div>
 
 				{/* Booking Summary & Confirm Button */}
 				{selectedDate && selectedTime && (
