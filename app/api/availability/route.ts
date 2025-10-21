@@ -118,6 +118,11 @@ export async function GET(request: NextRequest) {
 			.eq("status", "confirmed");
 
 		console.log(`📅 Found ${bookings?.length || 0} existing booking(s)`);
+		if (bookings && bookings.length > 0) {
+			console.log(
+				`   Booked times: ${bookings.map((b) => b.scheduled_time).join(", ")}`
+			);
+		}
 
 		// STEP 6: Get Google Calendar busy times
 		let busyTimes: any[] = [];
@@ -155,19 +160,29 @@ export async function GET(request: NextRequest) {
 				// Check if this slot is available
 
 				// Check 1: Is it blocked manually?
-				const isBlocked = blockedSlots?.some(
-					(block) =>
-						new Date(block.start_time) <= currentTime &&
-						new Date(block.end_time) > currentTime
-				);
+				const isBlocked = blockedSlots?.some((block) => {
+					if (!block.start_time || !block.end_time) return false; // Whole day block
+					const blockStart = new Date(`${dateParam}T${block.start_time}`);
+					const blockEnd = new Date(`${dateParam}T${block.end_time}`);
+					return blockStart <= currentTime && blockEnd > currentTime;
+				});
 
-				// Check 2: Is there already a booking?
+				// Check 2: Is there already a booking at this exact time?
+				// Database stores time as "15:00:00" (24-hour), convert to match
+				const currentTimeIn24Hour = format(currentTime, "HH:mm:ss"); // "15:00:00"
 				const isBooked = bookings?.some(
-					(booking) =>
-						new Date(booking.scheduled_at).getTime() === currentTime.getTime()
+					(booking) => booking.scheduled_time === currentTimeIn24Hour
 				);
 
-				// Check 3: Is co-founder busy on Google Calendar?
+				// Debug logging
+				if (isBooked) {
+					console.log(
+						`   🔴 ${format(
+							currentTime,
+							"h:mm a"
+						)} (${currentTimeIn24Hour}) is BOOKED`
+					);
+				} // Check 3: Is co-founder busy on Google Calendar?
 				const isBusy = busyTimes.some(
 					(busy: any) =>
 						new Date(busy.start) <= currentTime &&
