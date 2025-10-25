@@ -26,8 +26,12 @@ export function setCredentials(refreshToken: string) {
 	});
 }
 
+// Simple in-memory cache for Google Calendar API calls
+const calendarCache = new Map<string, { busy: any[]; timestamp: number }>();
+const CALENDAR_CACHE_TTL = 2 * 60 * 1000; // 2 minutes
+
 /**
- * Get busy times from Google Calendar
+ * Get busy times from Google Calendar with timeout and caching
  * Returns array of time blocks when co-founder is unavailable
  *
  * @param startDate - Start of date range to check
@@ -40,18 +44,45 @@ export async function getCalendarBusyTimes(
 	endDate: Date,
 	calendarId: string
 ) {
+	const cacheKey = `${calendarId}-${startDate.toISOString()}-${endDate.toISOString()}`;
+
+	// Check cache first
+	const cached = calendarCache.get(cacheKey);
+	if (cached && Date.now() - cached.timestamp < CALENDAR_CACHE_TTL) {
+		console.log("⚡ Using cached Google Calendar data");
+		return cached.busy;
+	}
+
 	const calendar = google.calendar({ version: "v3", auth: oauth2Client });
 
-	const response = await calendar.freebusy.query({
-		requestBody: {
-			timeMin: startDate.toISOString(),
-			timeMax: endDate.toISOString(),
-			items: [{ id: calendarId }], // Which calendar to check
-		},
+	// Add timeout to prevent hanging
+	const timeoutPromise = new Promise<never>((_, reject) => {
+		setTimeout(() => reject(new Error("Google Calendar API timeout")), 3000);
 	});
 
-	// Return busy time blocks (or empty array if all free)
-	return response.data.calendars?.[calendarId]?.busy || [];
+	try {
+		const response = await Promise.race([
+			calendar.freebusy.query({
+				requestBody: {
+					timeMin: startDate.toISOString(),
+					timeMax: endDate.toISOString(),
+					items: [{ id: calendarId }],
+				},
+			}),
+			timeoutPromise,
+		]);
+
+		const busy = response.data.calendars?.[calendarId]?.busy || [];
+
+		// Cache the result
+		calendarCache.set(cacheKey, { busy, timestamp: Date.now() });
+
+		return busy;
+	} catch (error) {
+		console.error("⚠️ Google Calendar API error:", error);
+		// Return empty array on error - we'll only use database bookings
+		return [];
+	}
 }
 
 /**
@@ -106,4 +137,15 @@ export async function createCalendarEvent(
 export async function deleteCalendarEvent(calendarId: string, eventId: string) {
 	const calendar = google.calendar({ version: "v3", auth: oauth2Client });
 	await calendar.events.delete({ calendarId, eventId });
+	// Clear cache when event is deleted
+	clearCalendarCache();
+}
+
+/**
+ * Clear the calendar cache
+ * Call this after creating/deleting events to ensure fresh data
+ */
+export function clearCalendarCache() {
+	calendarCache.clear();
+	console.log("🗑️ Cleared Google Calendar cache");
 }

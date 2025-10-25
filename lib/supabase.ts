@@ -41,51 +41,12 @@ export const supabaseAdmin = createClient(
 );
 
 /**
- * Database Types (TypeScript)
- * These help with autocomplete and type safety
+ * Database Types
+ * Import from models/types.ts for type definitions
  */
-
-export type Booking = {
-	id: string;
-	user_id: string;
-	client_name: string;
-	client_email: string;
-	client_phone: string | null;
-	scheduled_at: string;
-	duration_minutes: number;
-	status: "confirmed" | "cancelled" | "completed" | "no-show";
-	notes: string | null;
-	google_event_id: string | null;
-	created_at: string;
-	updated_at: string;
-};
-
-export type AvailabilityRule = {
-	id: string;
-	user_id: string;
-	day_of_week: number; // 0-6 (Sunday-Saturday)
-	start_time: string; // "09:00:00"
-	end_time: string; // "17:00:00"
-	timezone: string;
-	is_active: boolean;
-	created_at: string;
-};
-
-export type BlockedSlot = {
-	id: string;
-	user_id: string;
-	start_time: string;
-	end_time: string;
-	reason: string | null;
-	created_at: string;
-};
-
-export type User = {
-	id: string;
-	email: string;
-	name: string;
-	google_refresh_token: string | null;
-	google_calendar_id: string | null;
-	created_at: string;
-	updated_at: string;
-};
+export type {
+	Booking,
+	AvailabilityRule,
+	BlockedSlot,
+	User,
+} from "./models/types";

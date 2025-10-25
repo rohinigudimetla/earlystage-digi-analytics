@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import {
 	Card,
 	CardContent,
@@ -35,6 +35,13 @@ interface TimeSlot {
 	time: string; // e.g., "9:00 AM"
 	available: boolean; // false if co-founder is busy at this time
 }
+
+// Simple cache for availability data (5 min TTL)
+const availabilityCache = new Map<
+	string,
+	{ slots: TimeSlot[]; timestamp: number }
+>();
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
 // Generate available dates for the next 14 days (excluding weekends for now - can be configured later)
 function getAvailableDates() {
@@ -79,43 +86,74 @@ export function CalendarBooking() {
 	const [error, setError] = useState<string | null>(null);
 
 	const timeSectionRef = useRef<HTMLDivElement>(null);
+	const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
 	const availableDates = getAvailableDates();
 
-	// FETCH AVAILABLE TIME SLOTS when a date is selected
-	// This calls our /api/availability endpoint to check what times are free
+	// Fetch availability with caching and debouncing
+	const fetchAvailability = useCallback(async (date: Date) => {
+		const dateStr = date.toISOString().split("T")[0];
+
+		// Check cache first
+		const cached = availabilityCache.get(dateStr);
+		if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+			console.log("⚡ Using cached availability for", dateStr);
+			setTimeSlots(cached.slots);
+			setLoadingSlots(false);
+			return;
+		}
+
+		try {
+			const startTime = performance.now();
+			const res = await fetch(`/api/availability?date=${dateStr}`);
+			const duration = performance.now() - startTime;
+
+			if (!res.ok) throw new Error("Failed to fetch availability");
+
+			const data = await res.json();
+			const slots = data.slots || [];
+
+			// Cache the result
+			availabilityCache.set(dateStr, { slots, timestamp: Date.now() });
+
+			console.log(`⚡ Fetched availability in ${duration.toFixed(0)}ms`);
+			setTimeSlots(slots);
+			setLoadingSlots(false);
+		} catch (err) {
+			console.error("Error fetching availability:", err);
+			setError("Could not load available times. Please try again.");
+			setLoadingSlots(false);
+		}
+	}, []);
+
+	// FETCH AVAILABLE TIME SLOTS when a date is selected (with debouncing)
 	useEffect(() => {
 		if (!selectedDate) {
 			setTimeSlots([]);
 			return;
 		}
 
-		// When date changes, reset selected time and fetch new availability
+		// Reset state immediately
 		setSelectedTime(null);
-		setLoadingSlots(true);
 		setError(null);
+		setLoadingSlots(true);
 
-		// Format date as YYYY-MM-DD for the API
-		const dateStr = selectedDate.toISOString().split("T")[0];
+		// Clear any pending debounce timer
+		if (debounceTimerRef.current) {
+			clearTimeout(debounceTimerRef.current);
+		}
 
-		fetch(`/api/availability?date=${dateStr}`)
-			.then((res) => {
-				if (!res.ok) throw new Error("Failed to fetch availability");
-				return res.json();
-			})
-			.then((data) => {
-				// API returns array of {time: "9:00 AM", available: true/false}
-				console.log("📅 API Response:", data); // DEBUG: See what we get
-				console.log("📅 Slots:", data.slots); // DEBUG: See the slots
-				setTimeSlots(data.slots || []);
-				setLoadingSlots(false);
-			})
-			.catch((err) => {
-				console.error("Error fetching availability:", err);
-				setError("Could not load available times. Please try again.");
-				setLoadingSlots(false);
-			});
-	}, [selectedDate]);
+		// Debounce: wait 150ms before fetching (in case user is clicking through dates quickly)
+		debounceTimerRef.current = setTimeout(() => {
+			fetchAvailability(selectedDate);
+		}, 150);
+
+		return () => {
+			if (debounceTimerRef.current) {
+				clearTimeout(debounceTimerRef.current);
+			}
+		};
+	}, [selectedDate, fetchAvailability]);
 
 	// AUTO-SCROLL to center the card when date or time is selected
 	// This gives a smooth UX - the booking form scrolls into perfect view
@@ -180,7 +218,10 @@ export function CalendarBooking() {
 
 			const data = await response.json();
 
-			// Success! Show confirmation with Google Meet link
+			// Success! Clear cache for this date since availability changed
+			availabilityCache.delete(dateStr);
+
+			// Show confirmation with Google Meet link
 			setMeetingLink(data.meetingLink);
 			setIsBooked(true);
 			window.scrollTo({ top: 0, behavior: "smooth" });
