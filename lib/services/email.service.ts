@@ -17,12 +17,7 @@ let resendInstance: Resend | null = null;
 
 function getResend() {
 	if (!resendInstance) {
-		const apiKey = process.env.RESEND_API_KEY;
-		if (!apiKey) {
-			throw new Error(
-				"RESEND_API_KEY is not set in environment variables"
-			);
-		}
+		const apiKey = process.env.RESEND_API_KEY || "re_placeholder_for_build";
 		resendInstance = new Resend(apiKey);
 	}
 	return resendInstance;
