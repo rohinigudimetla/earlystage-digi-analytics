@@ -1,5 +1,3 @@
-import { Resend } from "resend";
-
 /**
  * Email Service using Resend
  *
@@ -12,15 +10,14 @@ import { Resend } from "resend";
  * 3. Reminder emails (future feature)
  */
 
-// Lazy initialize Resend to avoid build-time errors
-let resendInstance: Resend | null = null;
-
-function getResend() {
-	if (!resendInstance) {
-		const apiKey = process.env.RESEND_API_KEY || "re_placeholder_for_build";
-		resendInstance = new Resend(apiKey);
+// Dynamic import to avoid build-time initialization
+async function getResend() {
+	const { Resend } = await import("resend");
+	const apiKey = process.env.RESEND_API_KEY;
+	if (!apiKey) {
+		throw new Error("RESEND_API_KEY is not configured in environment variables");
 	}
-	return resendInstance;
+	return new Resend(apiKey);
 }
 
 /**
@@ -47,7 +44,7 @@ export async function sendClientConfirmation(params: {
 	});
 
 	try {
-		const resend = getResend();
+		const resend = await getResend();
 		await resend.emails.send({
 			from: process.env.FROM_EMAIL!,
 			to: clientEmail,
@@ -155,7 +152,7 @@ export async function sendCofounderNotification(params: {
 	});
 
 	try {
-		const resend = getResend();
+		const resend = await getResend();
 		await resend.emails.send({
 			from: process.env.FROM_EMAIL!,
 			to: cofounderEmail,
@@ -263,7 +260,7 @@ export async function sendCancellationEmail(params: {
 	});
 
 	try {
-		const resend = getResend();
+		const resend = await getResend();
 		await resend.emails.send({
 			from: process.env.FROM_EMAIL!,
 			to: clientEmail,
@@ -297,7 +294,7 @@ export async function sendAuditRequestNotification(params: {
 	const { businessName, website, email, phone } = params;
 
 	try {
-		const resend = getResend();
+		const resend = await getResend();
 		await resend.emails.send({
 			from: process.env.FROM_EMAIL!,
 			to: process.env.COFOUNDER_EMAIL!,
@@ -416,7 +413,7 @@ export async function sendAuditConfirmation(params: {
 	const { businessName, email } = params;
 
 	try {
-		const resend = getResend();
+		const resend = await getResend();
 		await resend.emails.send({
 			from: process.env.FROM_EMAIL!,
 			to: email,
