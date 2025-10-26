@@ -2,18 +2,29 @@ import { NextRequest, NextResponse } from "next/server";
 import { google } from "googleapis";
 import { createClient } from "@supabase/supabase-js";
 
-const oauth2Client = new google.auth.OAuth2(
-	process.env.GOOGLE_CLIENT_ID,
-	process.env.GOOGLE_CLIENT_SECRET,
-	process.env.NEXT_PUBLIC_APP_URL + "/api/auth/callback/google"
-);
+function getOAuth2Client() {
+	const clientId = process.env.GOOGLE_CLIENT_ID;
+	const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+	const appUrl = process.env.NEXT_PUBLIC_APP_URL;
+
+	if (!clientId || !clientSecret || !appUrl) {
+		throw new Error("Google OAuth credentials not configured");
+	}
+
+	return new google.auth.OAuth2(
+		clientId,
+		clientSecret,
+		appUrl + "/api/auth/callback/google"
+	);
+}
 
 const supabase = createClient(
-	process.env.NEXT_PUBLIC_SUPABASE_URL!,
-	process.env.SUPABASE_SERVICE_ROLE_KEY!
+	process.env.NEXT_PUBLIC_SUPABASE_URL || "https://placeholder.supabase.co",
+	process.env.SUPABASE_SERVICE_ROLE_KEY || "placeholder-service-key"
 );
 
 export async function GET(request: NextRequest) {
+	const oauth2Client = getOAuth2Client();
 	try {
 		const searchParams = request.nextUrl.searchParams;
 		const code = searchParams.get("code");
@@ -41,9 +52,13 @@ export async function GET(request: NextRequest) {
 
 		if (tokens.id_token) {
 			// Decode the ID token to get user email
+			const clientId = process.env.GOOGLE_CLIENT_ID;
+			if (!clientId) {
+				throw new Error("GOOGLE_CLIENT_ID not configured");
+			}
 			const ticket = await oauth2Client.verifyIdToken({
 				idToken: tokens.id_token,
-				audience: process.env.GOOGLE_CLIENT_ID!,
+				audience: clientId,
 			});
 			const payload = ticket.getPayload();
 			userEmail = payload?.email;

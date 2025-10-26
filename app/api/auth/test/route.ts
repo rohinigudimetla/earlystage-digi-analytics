@@ -1,12 +1,24 @@
 import { NextResponse } from "next/server";
 import { google } from "googleapis";
 
-export async function GET() {
-	const oauth2Client = new google.auth.OAuth2(
-		process.env.GOOGLE_CLIENT_ID,
-		process.env.GOOGLE_CLIENT_SECRET,
-		process.env.NEXT_PUBLIC_APP_URL + "/api/auth/callback/google"
+function getOAuth2Client() {
+	const clientId = process.env.GOOGLE_CLIENT_ID;
+	const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+	const appUrl = process.env.NEXT_PUBLIC_APP_URL;
+
+	if (!clientId || !clientSecret || !appUrl) {
+		throw new Error("Google OAuth credentials not configured");
+	}
+
+	return new google.auth.OAuth2(
+		clientId,
+		clientSecret,
+		appUrl + "/api/auth/callback/google"
 	);
+}
+
+export async function GET() {
+	const oauth2Client = getOAuth2Client();
 
 	const diagnostics = {
 		clientId: process.env.GOOGLE_CLIENT_ID,
