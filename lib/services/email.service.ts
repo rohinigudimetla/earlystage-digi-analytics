@@ -12,7 +12,21 @@ import { Resend } from "resend";
  * 3. Reminder emails (future feature)
  */
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy initialize Resend to avoid build-time errors
+let resendInstance: Resend | null = null;
+
+function getResend() {
+	if (!resendInstance) {
+		const apiKey = process.env.RESEND_API_KEY;
+		if (!apiKey) {
+			throw new Error(
+				"RESEND_API_KEY is not set in environment variables"
+			);
+		}
+		resendInstance = new Resend(apiKey);
+	}
+	return resendInstance;
+}
 
 /**
  * Send booking confirmation to client
@@ -38,6 +52,7 @@ export async function sendClientConfirmation(params: {
 	});
 
 	try {
+		const resend = getResend();
 		await resend.emails.send({
 			from: process.env.FROM_EMAIL!,
 			to: clientEmail,
@@ -145,6 +160,7 @@ export async function sendCofounderNotification(params: {
 	});
 
 	try {
+		const resend = getResend();
 		await resend.emails.send({
 			from: process.env.FROM_EMAIL!,
 			to: cofounderEmail,
@@ -252,6 +268,7 @@ export async function sendCancellationEmail(params: {
 	});
 
 	try {
+		const resend = getResend();
 		await resend.emails.send({
 			from: process.env.FROM_EMAIL!,
 			to: clientEmail,
@@ -285,6 +302,7 @@ export async function sendAuditRequestNotification(params: {
 	const { businessName, website, email, phone } = params;
 
 	try {
+		const resend = getResend();
 		await resend.emails.send({
 			from: process.env.FROM_EMAIL!,
 			to: process.env.COFOUNDER_EMAIL!,
@@ -403,6 +421,7 @@ export async function sendAuditConfirmation(params: {
 	const { businessName, email } = params;
 
 	try {
+		const resend = getResend();
 		await resend.emails.send({
 			from: process.env.FROM_EMAIL!,
 			to: email,
