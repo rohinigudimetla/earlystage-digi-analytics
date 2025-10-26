@@ -34,7 +34,7 @@ export async function sendClientConfirmation(params: {
 }) {
 	const { clientName, clientEmail, scheduledAt, meetingLink } = params;
 
-	// Format the date nicely
+	// Format the date nicely in EST
 	const formattedDate = scheduledAt.toLocaleString("en-US", {
 		weekday: "long",
 		year: "numeric",
@@ -42,6 +42,7 @@ export async function sendClientConfirmation(params: {
 		day: "numeric",
 		hour: "numeric",
 		minute: "2-digit",
+		timeZone: "America/New_York",
 		timeZoneName: "short",
 	});
 
@@ -150,6 +151,7 @@ export async function sendCofounderNotification(params: {
 		day: "numeric",
 		hour: "numeric",
 		minute: "2-digit",
+		timeZone: "America/New_York",
 		timeZoneName: "short",
 	});
 
@@ -259,6 +261,8 @@ export async function sendCancellationEmail(params: {
 		day: "numeric",
 		hour: "numeric",
 		minute: "2-digit",
+		timeZone: "America/New_York",
+		timeZoneName: "short",
 	});
 
 	try {

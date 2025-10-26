@@ -19,6 +19,22 @@ const SUPABASE_ANON_KEY =
 const SUPABASE_SERVICE_KEY =
 	process.env.SUPABASE_SERVICE_ROLE_KEY || "placeholder-service-key";
 
+// At runtime, validate that real credentials are present
+if (typeof window === "undefined") {
+	// Server-side only validation
+	if (
+		SUPABASE_URL === "https://placeholder.supabase.co" ||
+		SUPABASE_SERVICE_KEY === "placeholder-service-key"
+	) {
+		console.error("❌ CRITICAL: Supabase credentials not configured!");
+		console.error("SUPABASE_URL:", SUPABASE_URL);
+		console.error(
+			"SUPABASE_SERVICE_KEY:",
+			SUPABASE_SERVICE_KEY.substring(0, 20) + "..."
+		);
+	}
+}
+
 //  ============================================
 //  PUBLIC CLIENT (Frontend - Browser)
 //  ============================================
