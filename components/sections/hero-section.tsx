@@ -26,7 +26,13 @@ export default function RefinedHero() {
 	}, []);
 
 	return (
-		<div className="relative min-h-screen w-full bg-olive text-cream overflow-hidden">
+		<div className="relative min-h-screen w-full text-cream overflow-hidden">
+			{/* Background Image */}
+			<div className="absolute inset-0 w-full h-full">
+				<img src="/leaves.jpg" alt="" className="w-full h-full object-cover" />
+				<div className="absolute inset-0 bg-charcoal/70" />
+			</div>
+
 			<Navbar />
 
 			<div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -35,8 +41,8 @@ export default function RefinedHero() {
 			</div>
 
 			<div className="relative pt-32 pb-20 px-6 md:px-12 flex items-center min-h-screen">
-				<div className="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center">
-					{/* Left side - Typography */}
+				<div className="max-w-4xl mx-auto w-full text-center">
+					{/* Centered Typography */}
 					<div className="space-y-6">
 						<div
 							className={`transition-all duration-1000 ${
@@ -45,7 +51,7 @@ export default function RefinedHero() {
 									: "opacity-0 translate-y-20"
 							}`}
 						>
-							<h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-cream uppercase tracking-tight leading-none mb-6 relative h-[200px] md:h-[250px]">
+							<h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-cream uppercase tracking-tight leading-none mb-0 relative h-[200px] md:h-[250px] mx-auto">
 								{headlines.map((headline, index) => (
 									<span
 										key={index}
@@ -59,57 +65,36 @@ export default function RefinedHero() {
 									</span>
 								))}
 							</h1>
-							<p className="text-lg md:text-xl text-cream/70 leading-relaxed max-w-xl">
+							<p className="text-lg md:text-xl text-cream/70 leading-relaxed max-w-2xl mx-auto mb-8">
 								Get honest insights, easy reports and support you can trust.
 							</p>
-						</div>
 
-						<div
-							className={`flex flex-wrap gap-4 transition-all duration-1000 delay-200 ${
-								isVisible
-									? "opacity-100 translate-y-0"
-									: "opacity-0 translate-y-20"
-							}`}
-						>
-							<a href="/audit">
-								<Button
-									size="lg"
-									className="bg-rose text-charcoal hover:bg-burgundy hover:text-cream font-bold rounded-full font-sans"
-								>
-									Book a Free Audit
-								</Button>
-							</a>
-							<a href="/packages">
-								<Button
-									size="lg"
-									variant="outline"
-									className="!border-2 !border-cream !text-cream hover:!bg-cream hover:!text-olive font-bold !bg-transparent rounded-full font-sans"
-								>
-									Learn More
-								</Button>
-							</a>
-						</div>
-					</div>
-					{/* Right side - Image or Placeholder */}
-					<div
-						className={`relative transition-all duration-1200 delay-300 ${
-							isVisible
-								? "opacity-100 translate-x-0"
-								: "opacity-0 translate-x-20"
-						}`}
-					>
-						<div className="relative aspect-[4/3] overflow-hidden rounded-[32px] bg-rose border-2 border-rose/50 flex items-center justify-center">
-							<div className="text-center p-12">
-								<div className="text-6xl font-black text-charcoal/30 mb-4">
-									📊
-								</div>
-								<p className="text-charcoal/70 text-sm font-medium">
-									Analytics Dashboard Visualization
-								</p>
+							<div
+								className={`flex flex-wrap gap-4 justify-center transition-all duration-1000 delay-200 ${
+									isVisible
+										? "opacity-100 translate-y-0"
+										: "opacity-0 translate-y-20"
+								}`}
+							>
+								<a href="/audit">
+									<Button
+										size="lg"
+										className="bg-rose text-charcoal hover:bg-burgundy hover:text-cream font-bold rounded-full font-sans"
+									>
+										Book a Free Audit
+									</Button>
+								</a>
+								<a href="/packages">
+									<Button
+										size="lg"
+										variant="outline"
+										className="!border-2 !border-cream !text-cream hover:!bg-cream hover:!text-olive font-bold !bg-transparent rounded-full font-sans"
+									>
+										Learn More
+									</Button>
+								</a>
 							</div>
 						</div>
-						<div className="absolute -bottom-6 -right-6 w-32 h-32 bg-burgundy/60 rounded-[24px] -z-10" />
-						<div className="absolute -top-6 -left-6 w-24 h-24 border-2 border-rose rounded-[20px] -z-10" />
 					</div>
 				</div>
 			</div>
