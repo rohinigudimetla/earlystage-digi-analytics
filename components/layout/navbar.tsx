@@ -1,13 +1,18 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Navbar() {
 	return (
-		<nav className="absolute top-0 left-0 right-0 z-50 px-6 md:px-12 py-6 flex items-center justify-between">
-			<Link
-				href="/"
-				className="text-2xl md:text-3xl font-black tracking-tighter text-cream font-sans"
-			>
-				CHER DIGITAL
+		<nav className="sticky top-0 left-0 right-0 z-50 px-6 md:px-12 py-6 flex items-center justify-between">
+			<Link href="/" className="relative">
+				<Image
+					src="/cher (1)-cropped.svg"
+					alt="Cher Digital Analytics"
+					width={180}
+					height={60}
+					className="h-14 w-auto"
+					priority
+				/>
 			</Link>
 			<div className="hidden md:flex items-center gap-8 font-sans">
 				<a
