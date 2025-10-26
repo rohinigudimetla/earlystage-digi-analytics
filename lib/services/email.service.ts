@@ -15,7 +15,9 @@ async function getResend() {
 	const { Resend } = await import("resend");
 	const apiKey = process.env.RESEND_API_KEY;
 	if (!apiKey) {
-		throw new Error("RESEND_API_KEY is not configured in environment variables");
+		throw new Error(
+			"RESEND_API_KEY is not configured in environment variables"
+		);
 	}
 	return new Resend(apiKey);
 }
