@@ -271,3 +271,213 @@ export async function sendCancellationEmail(params: {
 		throw error;
 	}
 }
+
+/**
+ * Send free audit request notification to Charishma
+ * Alerts her when someone requests a free website audit
+ */
+export async function sendAuditRequestNotification(params: {
+	businessName: string;
+	website: string;
+	email: string;
+	phone: string;
+}) {
+	const { businessName, website, email, phone } = params;
+
+	try {
+		await resend.emails.send({
+			from: process.env.FROM_EMAIL!,
+			to: process.env.COFOUNDER_EMAIL!,
+			subject: `🎯 New Audit Request: ${businessName}`,
+			html: `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background: #c49797; color: #1b1b1d; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+            .content { background: #f8f6e3; padding: 30px; border-radius: 0 0 8px 8px; }
+            .client-info { background: white; padding: 20px; border-radius: 6px; margin: 20px 0; border: 2px solid #c49797; }
+            .info-row { margin: 15px 0; padding: 10px; border-bottom: 1px solid #f0f0f0; }
+            .info-row:last-child { border-bottom: none; }
+            .label { font-weight: bold; color: #834a49; display: block; margin-bottom: 5px; }
+            .value { color: #1b1b1d; font-size: 16px; }
+            .website-link { 
+              display: inline-block; 
+              background: #3d4436; 
+              color: #f8f6e3; 
+              padding: 10px 20px; 
+              text-decoration: none; 
+              border-radius: 6px;
+              margin: 10px 0;
+            }
+            .footer { 
+              margin-top: 20px; 
+              padding: 20px; 
+              background: #3d4436; 
+              color: #f8f6e3; 
+              border-radius: 6px; 
+              text-align: center;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1>🎯 New Free Audit Request!</h1>
+            </div>
+            <div class="content">
+              <p style="font-size: 18px; color: #834a49; font-weight: bold;">
+                Someone just requested a free website audit!
+              </p>
+              
+              <div class="client-info">
+                <h3 style="color: #834a49; margin-top: 0;">📋 Business Details</h3>
+                
+                <div class="info-row">
+                  <span class="label">Business Name:</span>
+                  <span class="value">${businessName}</span>
+                </div>
+                
+                <div class="info-row">
+                  <span class="label">Website:</span>
+                  <div style="margin-top: 8px;">
+                    <a href="${website}" class="website-link" target="_blank">
+                      Visit Website 🔗
+                    </a>
+                  </div>
+                  <span class="value" style="display: block; margin-top: 5px; font-size: 14px; color: #666;">
+                    ${website}
+                  </span>
+                </div>
+                
+                <div class="info-row">
+                  <span class="label">Email:</span>
+                  <span class="value">
+                    <a href="mailto:${email}" style="color: #834a49; text-decoration: underline;">
+                      ${email}
+                    </a>
+                  </span>
+                </div>
+                
+                <div class="info-row">
+                  <span class="label">Phone:</span>
+                  <span class="value">
+                    <a href="tel:${phone}" style="color: #834a49; text-decoration: underline;">
+                      ${phone}
+                    </a>
+                  </span>
+                </div>
+              </div>
+              
+              <div class="footer">
+                <p style="margin: 0; font-size: 14px;">
+                  💡 <strong>Next Steps:</strong> Review their website and reach out within 24 hours to schedule the audit call.
+                </p>
+              </div>
+            </div>
+          </div>
+        </body>
+        </html>
+      `,
+		});
+
+		console.log(
+			`✅ Audit request notification sent to ${process.env.COFOUNDER_EMAIL}`
+		);
+	} catch (error) {
+		console.error("❌ Failed to send audit request notification:", error);
+		throw error;
+	}
+}
+
+/**
+ * Send audit confirmation to client
+ * Confirms their audit request was received
+ */
+export async function sendAuditConfirmation(params: {
+	businessName: string;
+	email: string;
+}) {
+	const { businessName, email } = params;
+
+	try {
+		await resend.emails.send({
+			from: process.env.FROM_EMAIL!,
+			to: email,
+			subject: "We Got Your Audit Request! 🎉",
+			html: `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background: #c49797; color: #1b1b1d; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+            .content { background: #f8f6e3; padding: 30px; border-radius: 0 0 8px 8px; }
+            .highlight-box { 
+              background: white; 
+              padding: 20px; 
+              border-radius: 6px; 
+              margin: 20px 0; 
+              border-left: 4px solid #c49797;
+            }
+            .footer { 
+              margin-top: 20px; 
+              padding: 20px; 
+              background: #3d4436; 
+              color: #f8f6e3; 
+              border-radius: 6px;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1>✅ Thanks for Your Interest!</h1>
+            </div>
+            <div class="content">
+              <p style="font-size: 18px; color: #834a49;">
+                Hi there from <strong>${businessName}</strong>,
+              </p>
+              
+              <p style="font-size: 16px; color: #1b1b1d;">
+                We received your request for a free website audit and we're excited to help! 🎉
+              </p>
+              
+              <div class="highlight-box">
+                <h3 style="color: #834a49; margin-top: 0;">📊 What Happens Next?</h3>
+                <ol style="color: #1b1b1d; line-height: 1.8;">
+                  <li><strong>We'll Review Your Site</strong> - Our team will do a thorough analysis</li>
+                  <li><strong>We'll Reach Out</strong> - Expect to hear from us within 24 hours</li>
+                  <li><strong>Get Your Results</strong> - We'll schedule a call to walk through our findings</li>
+                </ol>
+              </div>
+              
+              <p style="font-size: 16px; color: #1b1b1d;">
+                We'll be looking at your SEO, performance, conversions, and more—everything that impacts your online success.
+              </p>
+              
+              <div class="footer">
+                <p style="margin: 0;">
+                  <strong>Questions in the meantime?</strong><br/>
+                  Just reply to this email—we're real people and we love to chat!
+                </p>
+                <p style="margin: 15px 0 0 0; font-size: 14px; opacity: 0.8;">
+                  - The Cher Digital Analytics Team
+                </p>
+              </div>
+            </div>
+          </div>
+        </body>
+        </html>
+      `,
+		});
+
+		console.log(`✅ Audit confirmation sent to ${email}`);
+	} catch (error) {
+		console.error("❌ Failed to send audit confirmation:", error);
+		throw error;
+	}
+}

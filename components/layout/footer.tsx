@@ -1,79 +1,98 @@
-import Link from "next/link"
+import Link from "next/link";
 
 /**
  * Site footer component
- * Contains copyright, links, and contact information (plain text, no clickable contact links)
+ * Magazine-style footer with brand info and links
  */
 export function Footer() {
-  return (
-    <footer className="w-full border-t border-border bg-card">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Brand */}
-          <div>
-            <h3 className="text-lg font-serif font-bold text-foreground mb-3">Cher Digital Analytics</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Empowering local brands with simple dashboards and actionable insights.
-            </p>
-          </div>
+	return (
+		<footer className="bg-charcoal py-16 px-6 border-t border-cream/10">
+			<div className="max-w-7xl mx-auto">
+				<div className="grid md:grid-cols-3 gap-12 mb-12">
+					{/* Brand */}
+					<div>
+						<h3 className="text-2xl font-black text-cream mb-4">
+							Cher Digital Analytics
+						</h3>
+						<p className="text-cream/60 text-sm leading-relaxed">
+							Empowering local brands with simple dashboards and actionable
+							insights.
+						</p>
+					</div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-sm font-semibold text-foreground mb-3">Quick Links</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/#what-we-do"
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  What We Do
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/#testimonials"
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Testimonials
-                </Link>
-              </li>
-              <li>
-                <Link href="/#faq" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
+					{/* Quick Links */}
+					<div>
+						<h4 className="text-rose text-sm tracking-wider uppercase font-bold mb-4">
+							Quick Links
+						</h4>
+						<ul className="space-y-3">
+							<li>
+								<a
+									href="/#what-we-do"
+									className="text-cream/80 hover:text-rose transition-colors text-sm"
+								>
+									What We Do
+								</a>
+							</li>
+							<li>
+								<a
+									href="/#testimonials"
+									className="text-cream/80 hover:text-rose transition-colors text-sm"
+								>
+									Testimonials
+								</a>
+							</li>
+							<li>
+								<a
+									href="/#faq"
+									className="text-cream/80 hover:text-rose transition-colors text-sm"
+								>
+									FAQ
+								</a>
+							</li>
+							<li>
+								<Link
+									href="/contact"
+									className="text-cream/80 hover:text-rose transition-colors text-sm"
+								>
+									Contact
+								</Link>
+							</li>
+						</ul>
+					</div>
 
-          <div>
-            <h4 className="text-sm font-semibold text-foreground mb-3">Get In Touch</h4>
-            <ul className="space-y-2">
-              <li>
-                <span className="text-sm text-muted-foreground">(555) 123-4567</span>
-              </li>
-              <li>
-                <span className="text-sm text-muted-foreground">hello@cherdigital.com</span>
-              </li>
-            </ul>
-          </div>
-        </div>
+					{/* Contact */}
+					<div>
+						<h4 className="text-rose text-sm tracking-wider uppercase font-bold mb-4">
+							Get In Touch
+						</h4>
+						<ul className="space-y-3">
+							<li>
+								<span className="text-cream/80 text-sm">(555) 123-4567</span>
+							</li>
+							<li>
+								<span className="text-cream/80 text-sm">
+									hello@cherdigital.com
+								</span>
+							</li>
+						</ul>
+					</div>
+				</div>
 
-        <div className="mt-8 pt-8 border-t border-border">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Cher Digital Analytics. All rights reserved.
-            </p>
-            <Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Privacy Policy
-            </Link>
-          </div>
-        </div>
-      </div>
-    </footer>
-  )
+				{/* Bottom */}
+				<div className="border-t border-cream/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+					<p className="text-cream/40 text-xs">
+						© {new Date().getFullYear()} Cher Digital Analytics. All rights
+						reserved.
+					</p>
+					<Link
+						href="/privacy"
+						className="text-cream/40 hover:text-rose transition-colors text-xs"
+					>
+						Privacy Policy
+					</Link>
+				</div>
+			</div>
+		</footer>
+	);
 }

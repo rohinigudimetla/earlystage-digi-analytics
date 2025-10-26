@@ -1,42 +1,43 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Open_Sans, Montserrat } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
-import { Suspense } from "react"
-import "./globals.css"
+import type React from "react";
+import type { Metadata } from "next";
+import { Space_Grotesk, Outfit } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { Suspense } from "react";
+import "./globals.css";
 
-const openSans = Open_Sans({
-  subsets: ["latin"],
-  variable: "--font-open-sans",
-  display: "swap",
-})
+const spaceGrotesk = Space_Grotesk({
+	subsets: ["latin"],
+	variable: "--font-sans",
+	display: "swap",
+});
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  variable: "--font-montserrat",
-  display: "swap",
-})
+const outfit = Outfit({
+	subsets: ["latin"],
+	variable: "--font-mono",
+	display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Cher Digital Analytics | Simple Dashboards for Local Businesses",
-  description:
-    "We help local businesses discover what drives real foot traffic and sales using simple dashboards, transparent pricing, and AI-powered insights.",
-  generator: "v0.app",
-}
+	title: "Cher Digital Analytics - Local Business Insights",
+	description: "Simple analytics for local businesses",
+};
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body className={`${openSans.variable} ${montserrat.variable} antialiased`}>
-        <Suspense fallback={null}>
-          {children}
-          <Analytics />
-        </Suspense>
-      </body>
-    </html>
-  )
+	return (
+		<html
+			lang="en"
+			className={`dark ${spaceGrotesk.variable} ${outfit.variable}`}
+		>
+			<body>
+				<Suspense fallback={null}>
+					{children}
+					<Analytics />
+				</Suspense>
+			</body>
+		</html>
+	);
 }

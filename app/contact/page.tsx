@@ -1,156 +1,181 @@
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
+"use client";
+
+import { useEffect } from "react";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { CalendarBooking } from "@/components/booking/calendar-booking";
+import Navbar from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer";
 
-/**
- * Contact page
- * Displays contact information as plain text (no clickable links or buttons per requirements)
- */
 export default function ContactPage() {
+	useEffect(() => {
+		const handleScroll = () => {
+			const scrollPercent =
+				window.scrollY /
+				(document.documentElement.scrollHeight - window.innerHeight);
+			document.documentElement.style.setProperty(
+				"--scroll-progress",
+				scrollPercent.toString()
+			);
+			const hueShift = scrollPercent * 30;
+			document.documentElement.style.setProperty(
+				"--scroll-hue",
+				hueShift.toString()
+			);
+			const blob1Y = 20 + scrollPercent * 60;
+			const blob2Y = 40 - scrollPercent * 30;
+			document.documentElement.style.setProperty("--blob1-y", `${blob1Y}%`);
+			document.documentElement.style.setProperty("--blob2-y", `${blob2Y}%`);
+		};
+
+		window.addEventListener("scroll", handleScroll, { passive: true });
+		handleScroll();
+
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
+
 	return (
-		<div className="min-h-screen flex flex-col">
-			<Header />
-			<main className="flex-1 py-20">
-				<div className="container mx-auto px-4">
-					<div className="max-w-4xl mx-auto">
-						<div className="text-center mb-12">
-							<h1 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-4">
+		<>
+			<div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+				<div
+					className="absolute w-[800px] h-[800px] rounded-full blur-[120px] opacity-20 transition-all duration-700 ease-out"
+					style={{
+						left: "10%",
+						top: "var(--blob1-y, 20%)",
+						background:
+							"radial-gradient(circle, rgba(196, 151, 151, 0.4) 0%, transparent 70%)",
+						filter: "hue-rotate(calc(var(--scroll-hue, 0) * 1deg))",
+					}}
+				/>
+				<div
+					className="absolute w-[600px] h-[600px] rounded-full blur-[100px] opacity-15 transition-all duration-700 ease-out"
+					style={{
+						right: "15%",
+						top: "var(--blob2-y, 40%)",
+						background:
+							"radial-gradient(circle, rgba(131, 74, 73, 0.5) 0%, transparent 70%)",
+						filter: "hue-rotate(calc(var(--scroll-hue, 0) * -1deg))",
+					}}
+				/>
+			</div>
+
+			<div className="relative min-h-screen bg-olive text-cream overflow-hidden">
+				<Navbar />
+
+				<main className="relative pt-32 pb-20 px-6 z-10">
+					<div className="max-w-6xl mx-auto">
+						<div className="text-center mb-16">
+							<h1 className="text-5xl md:text-6xl font-black text-cream mb-6">
 								Let's Talk About Your Business
 							</h1>
-							<p className="text-lg text-muted-foreground leading-relaxed">
-								Ready to get started? Reach out to us directly—all reports and
-								communications are handled personally via email and phone.
+							<p className="text-xl text-cream/70 leading-relaxed max-w-3xl mx-auto">
+								Ready to get started? Book a free consultation or reach out to
+								us directly—all reports and communications are handled
+								personally via email and phone.
 							</p>
 						</div>
-
-						<div className="mb-12">
+						<div className="mb-16">
 							<CalendarBooking />
 						</div>
-
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-							<Card className="border-2 border-primary/20">
-								<CardHeader>
-									<div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-										<Phone className="w-6 h-6 text-primary" />
-									</div>
-									<CardTitle className="text-2xl font-serif">Call Us</CardTitle>
-									<CardDescription>
-										Speak directly with our team
-									</CardDescription>
-								</CardHeader>
-								<CardContent>
-									<p className="text-2xl font-semibold text-foreground">
-										(555) 123-4567
-									</p>
-								</CardContent>
-							</Card>
+							<div className="bg-cream/10 backdrop-blur-sm border-4 border-cream rounded-[32px] p-8 md:p-12 hover:scale-105 hover:shadow-2xl transition-all duration-500">
+								<div className="w-16 h-16 rounded-full bg-cream/20 flex items-center justify-center mb-6">
+									<Phone className="w-8 h-8 text-cream" />
+								</div>
+								<h2 className="text-3xl font-black text-cream mb-3">Call Us</h2>
+								<p className="text-cream/70 mb-6 leading-relaxed">
+									Speak directly with our team
+								</p>
+								<p className="text-2xl font-bold text-cream">(555) 123-4567</p>
+							</div>
 
-							<Card className="border-2 border-primary/20">
-								<CardHeader>
-									<div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-										<Mail className="w-6 h-6 text-primary" />
+							<div className="bg-cream/10 backdrop-blur-sm border-4 border-cream rounded-[32px] p-8 md:p-12 hover:scale-105 hover:shadow-2xl transition-all duration-500">
+								<div className="w-16 h-16 rounded-full bg-cream/20 flex items-center justify-center mb-6">
+									<Mail className="w-8 h-8 text-cream" />
+								</div>
+								<h2 className="text-3xl font-black text-cream mb-3">
+									Email Us
+								</h2>
+								<p className="text-cream/70 mb-6 leading-relaxed">
+									We'll respond within 24 hours
+								</p>
+								<p className="text-2xl font-bold text-cream">
+									hello@cherdigital.com
+								</p>
+							</div>
+						</div>{" "}
+						<div className="bg-olive/50 backdrop-blur-sm rounded-[48px] p-8 md:p-12 mb-12">
+							<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+								<div className="flex gap-4">
+									<div className="w-12 h-12 rounded-full bg-rose/20 flex items-center justify-center flex-shrink-0">
+										<Clock className="w-6 h-6 text-rose" />
 									</div>
-									<CardTitle className="text-2xl font-serif">
-										Email Us
-									</CardTitle>
-									<CardDescription>
-										We'll respond within 24 hours
-									</CardDescription>
-								</CardHeader>
-								<CardContent>
-									<p className="text-2xl font-semibold text-foreground">
-										hello@cherdigital.com
-									</p>
-								</CardContent>
-							</Card>
-						</div>
-
-						{/* Additional Information */}
-						<Card className="bg-secondary/5 border-border">
-							<CardContent className="pt-6">
-								<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-									<div className="flex gap-4">
-										<div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-											<Clock className="w-5 h-5 text-primary" />
-										</div>
-										<div>
-											<h3 className="font-semibold text-foreground mb-2">
-												Business Hours
-											</h3>
-											<p className="text-sm text-muted-foreground leading-relaxed">
-												Monday - Friday: 9:00 AM - 6:00 PM PST
-												<br />
-												Saturday: 10:00 AM - 2:00 PM PST
-												<br />
-												Sunday: Closed
-											</p>
-										</div>
-									</div>
-
-									<div className="flex gap-4">
-										<div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-											<MapPin className="w-5 h-5 text-primary" />
-										</div>
-										<div>
-											<h3 className="font-semibold text-foreground mb-2">
-												Service Area
-											</h3>
-											<p className="text-sm text-muted-foreground leading-relaxed">
-												We serve local businesses across the United States.
-												Remote consultations available nationwide.
-											</p>
-										</div>
+									<div>
+										<h3 className="text-xl font-bold text-cream mb-3">
+											Business Hours
+										</h3>
+										<p className="text-cream/70 leading-relaxed">
+											Monday - Friday: 9:00 AM - 6:00 PM PST
+											<br />
+											Saturday: 10:00 AM - 2:00 PM PST
+											<br />
+											Sunday: Closed
+										</p>
 									</div>
 								</div>
-							</CardContent>
-						</Card>
 
-						{/* What to Expect */}
-						<div className="mt-12 text-center">
-							<h2 className="text-2xl font-serif font-bold text-foreground mb-6">
+								<div className="flex gap-4">
+									<div className="w-12 h-12 rounded-full bg-rose/20 flex items-center justify-center flex-shrink-0">
+										<MapPin className="w-6 h-6 text-rose" />
+									</div>
+									<div>
+										<h3 className="text-xl font-bold text-cream mb-3">
+											Service Area
+										</h3>
+										<p className="text-cream/70 leading-relaxed">
+											We serve local businesses across the United States. Remote
+											consultations available nationwide.
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div className="text-center mb-12">
+							<h2 className="text-4xl font-black text-cream mb-12">
 								What Happens Next?
 							</h2>
-							<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-								<div className="p-6">
-									<div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 text-primary font-bold text-xl">
+							<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+								<div className="border-4 border-rose rounded-[32px] p-8 hover:bg-rose/10 hover:scale-105 transition-all duration-500">
+									<div className="w-16 h-16 rounded-full bg-rose/20 flex items-center justify-center mx-auto mb-6 text-rose font-black text-2xl">
 										1
 									</div>
-									<h3 className="font-semibold text-foreground mb-2">
+									<h3 className="text-xl font-bold text-cream mb-4">
 										Initial Conversation
 									</h3>
-									<p className="text-sm text-muted-foreground leading-relaxed">
+									<p className="text-cream/70 leading-relaxed">
 										We'll discuss your business goals and current analytics
 										setup—no forms, just a friendly chat.
 									</p>
 								</div>
-								<div className="p-6">
-									<div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 text-primary font-bold text-xl">
+								<div className="border-4 border-rose rounded-[32px] p-8 hover:bg-rose/10 hover:scale-105 transition-all duration-500">
+									<div className="w-16 h-16 rounded-full bg-rose/20 flex items-center justify-center mx-auto mb-6 text-rose font-black text-2xl">
 										2
 									</div>
-									<h3 className="font-semibold text-foreground mb-2">
+									<h3 className="text-xl font-bold text-cream mb-4">
 										Personal Onboarding
 									</h3>
-									<p className="text-sm text-muted-foreground leading-relaxed">
+									<p className="text-cream/70 leading-relaxed">
 										We'll set up tracking for your tools and get everything
 										ready for your first report.
 									</p>
 								</div>
-								<div className="p-6">
-									<div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 text-primary font-bold text-xl">
+								<div className="border-4 border-rose rounded-[32px] p-8 hover:bg-rose/10 hover:scale-105 transition-all duration-500">
+									<div className="w-16 h-16 rounded-full bg-rose/20 flex items-center justify-center mx-auto mb-6 text-rose font-black text-2xl">
 										3
 									</div>
-									<h3 className="font-semibold text-foreground mb-2">
+									<h3 className="text-xl font-bold text-cream mb-4">
 										Monthly Email Reports
 									</h3>
-									<p className="text-sm text-muted-foreground leading-relaxed">
+									<p className="text-cream/70 leading-relaxed">
 										Receive clear, actionable insights every month, with ongoing
 										support whenever you need it.
 									</p>
@@ -158,9 +183,10 @@ export default function ContactPage() {
 							</div>
 						</div>
 					</div>
-				</div>
-			</main>
-			<Footer />
-		</div>
+				</main>
+
+				<Footer />
+			</div>
+		</>
 	);
 }

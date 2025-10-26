@@ -1,198 +1,158 @@
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
-import { Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+﻿"use client";
 
-/**
- * Service package type definition
- */
-interface ServicePackage {
-	icon: string;
-	name: string;
-	description: string;
-	price: string;
-	setupFee: string;
-	features: string[];
-}
-
-/**
- * What We Offer section component
- * Displays three service packages with transparent pricing
- */
-const packages: ServicePackage[] = [
-	{
-		icon: "✨",
-		name: "The Glow Starter",
-		description:
-			"Perfect for salons and local businesses building their online presence",
-		price: "$450/month",
-		setupFee: "$800 one-time website setup",
-		features: [
-			"AI-Powered Google Business Profile Setup + Optimization",
-			"Local SEO & Keyword Strategy with monthly ranking updates",
-			"AI Analytics Dashboard (Looker Studio) tracking calls, clicks, and profile views",
-			"Website Landing Page Maintenance (hosting, content refreshes, mobile optimization)",
-			"Ongoing optimization, monitoring, and performance reporting",
-		],
-	},
-	{
-		icon: "🪄",
-		name: "The Digital Makeover",
-		description: "For growing salons that want to turn clicks into clients",
-		price: "$850/month",
-		setupFee: "$900 one-time (or $150/mo maintenance)",
-		features: [
-			"Everything in Glow Starter",
-			"Google + Meta Ads Management (2 platforms) with A/B testing & budget optimization",
-			"Conversion Tracking Setup for every booking, call, and direction click",
-			"Custom Website (Up to 3 Pages) — SEO-optimized, mobile-friendly, branded",
-			"Monthly Strategy Report + 45-min consultation call",
-			"Optional: Booking integration (Vagaro, GlossGenius) — $100 setup",
-		],
-	},
-	{
-		icon: "👑",
-		name: "The Luxe Growth Suite",
-		description: "For salons ready to scale, automate, and dominate locally",
-		price: "$1,200/month",
-		setupFee: "Custom growth strategy included",
-		features: [
-			"Everything in Digital Makeover",
-			"AI-Powered Ad Testing & Budget Optimization using machine learning",
-			"Email + SMS Remarketing Setup with automated client retention campaigns",
-			"Advanced Local SEO + Review Strategy with hyperlocal keyword expansion",
-			"Full Analytics Dashboard consolidating ad ROI, website traffic (GA4), and bookings",
-			"Quarterly Growth Strategy Call with 90-day action plan",
-		],
-	},
-];
-
-/**
- * Process steps for working with Cher Digital
- */
-const processSteps = [
-	{
-		number: "01",
-		title: "Discovery Call",
-		description: "15 minutes to find out your goals and current tools",
-	},
-	{
-		number: "02",
-		title: "Setup & Integration",
-		description: "1 week for GA4, Google Business, Meta Ads setup",
-	},
-	{
-		number: "03",
-		title: "Monthly Reporting",
-		description: "Ongoing automated tracking and monthly insights via email",
-	},
-	{
-		number: "04",
-		title: "Review & Recommend",
-		description: "Monthly calls to discuss what's working and what to do next",
-	},
-];
+import { useEffect, useState, useRef } from "react";
+import { BarChart3, TrendingUp, Users, Check } from "lucide-react";
 
 export function WhatWeDoSection() {
+	const [isVisible, setIsVisible] = useState(false);
+	const sectionRef = useRef<HTMLElement>(null);
+
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				if (entries[0].isIntersecting) {
+					setIsVisible(true);
+				}
+			},
+			{ threshold: 0.1 }
+		);
+
+		if (sectionRef.current) observer.observe(sectionRef.current);
+
+		return () => {
+			observer.disconnect();
+		};
+	}, []);
+
+	const services = [
+		{
+			icon: BarChart3,
+			title: "Simple Dashboards",
+			description:
+				"We create easy-to-understand dashboards that show you exactly what's working and what's notno confusing jargon, just clear insights.",
+		},
+		{
+			icon: TrendingUp,
+			title: "Transparent Pricing",
+			description:
+				"No hidden fees, no surprises. You'll know exactly what you're paying for, and you can upgrade or downgrade anytime.",
+			features: [
+				"Month-to-month billing",
+				"Cancel anytime, no penalties",
+				"Flexible plan upgrades",
+				"Clear pricing breakdown",
+			],
+		},
+		{
+			icon: Users,
+			title: "Personal Support",
+			description:
+				"Real people, real answers. When you reach out, you'll talk to someone who knows your businessnot a chatbot.",
+		},
+	];
+
 	return (
-		<section id="what-we-do" className="w-full py-20 bg-background">
-			<div className="container mx-auto px-4">
-				{/* Service Packages */}
-				<div className="text-center mb-12">
-					<h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4">
-						What We Offer
+		<section
+			ref={sectionRef}
+			id="what-we-do"
+			className="py-24 px-6 bg-olive relative overflow-hidden"
+		>
+			<div className="absolute inset-0 pointer-events-none">
+				<div className="absolute top-40 left-10 w-72 h-72 bg-rose/10 rounded-full blur-3xl" />
+				<div className="absolute bottom-20 right-20 w-96 h-96 bg-burgundy/10 rounded-full blur-3xl" />
+			</div>
+
+			<div className="max-w-7xl mx-auto relative z-10 bg-olive/50 backdrop-blur-sm rounded-[48px] p-8 md:p-12">
+				<div
+					className={`text-center mb-16 transition-all duration-1000 ${
+						isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+					}`}
+				>
+					<h2 className="text-4xl md:text-6xl font-black text-cream mb-6 tracking-tight">
+						What We Do
 					</h2>
-					<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-						Three transparent packages designed for local businesses at every
-						stage of growth.
+					<p className="text-lg text-cream/80 max-w-3xl mx-auto leading-relaxed">
+						We help local businesses discover what drives real foot traffic and
+						sales using simple dashboards, transparent pricing, and AI-powered
+						insights.
 					</p>
 				</div>
 
-				<div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-					{packages.map((pkg, index) => (
-						<Card
-							key={index}
-							className={`border-border hover:shadow-xl transition-all ${
-								index === 1 ? "md:scale-105 border-primary/50" : ""
-							}`}
-						>
-							<CardHeader>
-								<div className="text-4xl mb-4">{pkg.icon}</div>
-								<CardTitle className="text-2xl font-serif mb-2">
-									{pkg.name}
-								</CardTitle>
-								<CardDescription className="text-muted-foreground leading-relaxed mb-4">
-									{pkg.description}
-								</CardDescription>
-								<div className="pt-4 border-t border-border">
-									<div className="text-3xl font-bold text-primary mb-1">
-										{pkg.price}
-									</div>
-									<div className="text-sm text-muted-foreground">
-										{pkg.setupFee}
-									</div>
-								</div>
-							</CardHeader>
-							<CardContent>
-								<ul className="space-y-3">
-									{pkg.features.map((feature, featureIndex) => (
-										<li key={featureIndex} className="flex items-start gap-3">
-											<Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-											<span className="text-sm text-muted-foreground leading-relaxed">
-												{feature}
-											</span>
-										</li>
-									))}
-								</ul>
-							</CardContent>
-						</Card>
-					))}
-				</div>
-
-				<div className="flex justify-center mb-20">
-					<Link href="/contact">
-						<Button size="lg" className="px-8">
-							Get Started
-						</Button>
-					</Link>
-				</div>
-
-				{/* Process Section */}
-				<div className="mt-20">
-					<div className="text-center mb-12">
-						<h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4">
-							Your Process
-						</h2>
-						<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-							What to expect when you work with Cher Digital Analytics.
+				<div className="grid grid-cols-1 md:grid-cols-6 gap-6 max-w-6xl mx-auto">
+					<div
+						className={`md:col-span-2 border-4 border-rose rounded-[32px] p-8 hover:bg-rose/10 hover:scale-105 transition-all duration-500 ${
+							isVisible
+								? "opacity-100 translate-y-0"
+								: "opacity-0 translate-y-20"
+						}`}
+						style={{ transitionDelay: "0ms" }}
+					>
+						<div className="w-16 h-16 bg-rose rounded-full flex items-center justify-center mb-6">
+							<BarChart3 className="w-8 h-8 text-charcoal" />
+						</div>
+						<h3 className="text-2xl font-bold text-cream mb-4">
+							{services[0].title}
+						</h3>
+						<p className="text-cream/70 leading-relaxed">
+							{services[0].description}
 						</p>
 					</div>
 
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-						{processSteps.map((step, index) => (
-							<div key={index} className="relative">
-								<div className="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-shadow h-full">
-									<div className="text-5xl font-bold text-primary/20 mb-4">
-										{step.number}
-									</div>
-									<h3 className="text-xl font-serif font-bold text-foreground mb-2">
-										{step.title}
-									</h3>
-									<p className="text-muted-foreground leading-relaxed">
-										{step.description}
-									</p>
-								</div>
-								{index < processSteps.length - 1 && (
-									<div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-primary/30" />
-								)}
+					<div
+						className={`md:col-span-4 bg-burgundy rounded-[32px] p-8 flex flex-col hover:scale-105 hover:shadow-2xl transition-all duration-500 ${
+							isVisible
+								? "opacity-100 translate-y-0"
+								: "opacity-0 translate-y-20"
+						}`}
+						style={{ transitionDelay: "150ms" }}
+					>
+						<div className="flex items-start gap-6 mb-8">
+							<div className="w-16 h-16 bg-cream/20 rounded-full flex items-center justify-center flex-shrink-0">
+								<TrendingUp className="w-8 h-8 text-cream" />
 							</div>
-						))}
+							<div>
+								<h3 className="text-2xl font-bold text-cream mb-4">
+									{services[1].title}
+								</h3>
+								<p className="text-cream/80 leading-relaxed">
+									{services[1].description}
+								</p>
+							</div>
+						</div>
+
+						<div className="grid grid-cols-2 gap-3 mt-8">
+							{services[1].features?.map((feature, idx) => (
+								<div key={idx} className="flex items-center gap-2">
+									<div className="w-5 h-5 rounded-full bg-cream/20 flex items-center justify-center flex-shrink-0">
+										<Check className="w-3 h-3 text-cream" />
+									</div>
+									<span className="text-cream/90 text-sm">{feature}</span>
+								</div>
+							))}
+						</div>
+					</div>
+
+					<div
+						className={`md:col-span-6 border-4 border-rose rounded-[32px] p-8 hover:bg-gradient-to-r hover:from-rose/20 hover:to-burgundy/20 hover:scale-[1.02] transition-all duration-500 ${
+							isVisible
+								? "opacity-100 translate-y-0"
+								: "opacity-0 translate-y-20"
+						}`}
+						style={{ transitionDelay: "300ms" }}
+					>
+						<div className="flex items-center gap-6">
+							<div className="w-20 h-20 bg-rose rounded-full flex items-center justify-center flex-shrink-0">
+								<Users className="w-10 h-10 text-charcoal" />
+							</div>
+							<div className="flex-1">
+								<h3 className="text-3xl font-bold text-cream mb-3">
+									{services[2].title}
+								</h3>
+								<p className="text-cream/80 leading-relaxed text-lg">
+									{services[2].description}
+								</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

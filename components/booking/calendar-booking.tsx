@@ -1,13 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -244,93 +237,95 @@ export function CalendarBooking() {
 	// SUCCESS SCREEN - Shows after booking is confirmed
 	if (isBooked && selectedDate && selectedTime) {
 		return (
-			<Card className="border-2 border-primary/20">
-				<CardContent className="pt-12 pb-12 text-center">
-					<div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
-						<CheckCircle2 className="w-8 h-8 text-primary" />
+			<div className="bg-burgundy rounded-[32px] font-sans p-12 text-center">
+				<div className="w-16 h-16 bg-rose/20 flex items-center justify-center mx-auto mb-6 rounded-full">
+					<CheckCircle2 className="w-16 h-16 text-cream" />
+				</div>
+				<h3 className="text-2xl font-bold text-cream mb-4 font-sans">
+					Booking Confirmed!
+				</h3>
+				<p className="text-cream/90 mb-6 font-sans">
+					We've sent a confirmation email with all the details.
+				</p>
+
+				{/* Show Google Meet link if available */}
+				{meetingLink && (
+					<div className="bg-rose/20 rounded-[24px] p-6 mb-6">
+						<p className="text-sm text-cream mb-3 font-sans">
+							Your Google Meet link:
+						</p>
+						<a
+							href={meetingLink}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="text-cream font-bold hover:text-cream/80 break-all font-sans"
+						>
+							{meetingLink}
+						</a>
 					</div>
-					<h3 className="text-2xl font-serif font-bold text-foreground mb-4">
-						Call Scheduled!
-					</h3>
-					<p className="text-lg text-muted-foreground mb-2">
-						{formatDate(selectedDate)} at {selectedTime}
-					</p>
-					<p className="text-sm text-muted-foreground leading-relaxed max-w-md mx-auto mb-6">
-						We've sent you a confirmation email with all the details. Looking
-						forward to speaking with you!
-					</p>
+				)}
 
-					{/* Show Google Meet link if available */}
-					{meetingLink && (
-						<div className="mb-6">
-							<Button
-								onClick={() => window.open(meetingLink, "_blank")}
-								variant="default"
-								className="gap-2"
-							>
-								<ExternalLink className="w-4 h-4" />
-								Join Google Meet
-							</Button>
-						</div>
-					)}
-
-					<Button
-						onClick={() => {
-							setIsBooked(false);
-							setSelectedDate(null);
-							setSelectedTime(null);
-							setClientName("");
-							setClientEmail("");
-							setClientPhone("");
-							setMessage("");
-							setMeetingLink(null);
-						}}
-						variant="outline"
-					>
-						Schedule Another Call
-					</Button>
-				</CardContent>
-			</Card>
+				<button
+					onClick={() => {
+						setIsBooked(false);
+						setSelectedDate(null);
+						setSelectedTime(null);
+						setClientName("");
+						setClientEmail("");
+						setClientPhone("");
+						setMessage("");
+						setMeetingLink(null);
+					}}
+					className="bg-rose text-charcoal hover:bg-rose/90 font-bold rounded-full font-sans px-8 py-4"
+				>
+					Book Another Call
+				</button>
+			</div>
 		);
 	}
 
 	// MAIN BOOKING FORM
 	return (
-		<Card ref={timeSectionRef} className="border-2 border-primary/20">
-			<CardHeader>
-				<div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-					<Calendar className="w-6 h-6 text-primary" />
+		<div
+			ref={timeSectionRef}
+			className="bg-burgundy rounded-[32px] font-sans p-8"
+		>
+			<div className="mb-8">
+				<div className="w-12 h-12 rounded-full bg-rose/20 flex items-center justify-center mb-4">
+					<Calendar className="w-6 h-6 text-cream" />
 				</div>
-				<CardTitle className="text-2xl font-serif">Schedule a Call</CardTitle>
-				<CardDescription>
+				<h2 className="text-2xl font-bold text-cream font-sans">
+					Schedule a Call
+				</h2>
+				<p className="text-cream/80 font-sans">
 					Pick a date and time that works best for you
-				</CardDescription>
-			</CardHeader>
-			<CardContent className="space-y-6">
+				</p>
+			</div>
+			<div className="space-y-8">
 				{/* Error Message */}
 				{error && (
-					<div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4 flex items-start gap-3">
-						<AlertCircle className="w-5 h-5 text-destructive mt-0.5" />
-						<p className="text-sm text-destructive">{error}</p>
+					<div className="bg-rose/20 border border-rose/30 rounded-[24px] p-4 flex items-start gap-3">
+						<AlertCircle className="w-5 h-5 text-rose mt-0.5" />
+						<p className="text-sm text-cream font-sans">{error}</p>
 					</div>
 				)}
 
 				{/* STEP 1: Date Selection */}
 				<div>
-					<h3 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+					<h3 className="text-base font-bold text-cream mb-3 flex items-center gap-2 font-sans">
 						<Calendar className="w-4 h-4" />
 						Select a Date
 					</h3>
-					<div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+					<div className="grid grid-cols-2 md:grid-cols-3 gap-3">
 						{availableDates.slice(0, 9).map((date, index) => (
 							<button
 								key={index}
 								onClick={() => setSelectedDate(date)}
 								className={cn(
-									"p-3 rounded-lg border-2 text-sm font-medium transition-all hover:border-primary/50",
+									"p-4 rounded-[24px] text-center transition-all font-sans font-medium",
 									selectedDate?.toDateString() === date.toDateString()
-										? "border-primary bg-primary/5 text-foreground"
-										: "border-border text-muted-foreground hover:text-foreground"
+										? "bg-rose text-cream shadow-lg scale-105"
+										: "bg-rose/30 text-cream hover:bg-rose/50 hover:scale-105"
 								)}
 							>
 								{formatDate(date)}
@@ -342,36 +337,33 @@ export function CalendarBooking() {
 				{/* STEP 2: Time Selection (only shows when date is selected) */}
 				{selectedDate && (
 					<div>
-						<h3 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+						<h3 className="text-base font-bold text-cream mb-3 flex items-center gap-2 font-sans">
 							<Clock className="w-4 h-4" />
 							Select a Time
 						</h3>
 
 						{loadingSlots ? (
-							<div className="flex items-center justify-center py-8">
-								<Loader2 className="w-6 h-6 animate-spin text-primary" />
-								<span className="ml-2 text-sm text-muted-foreground">
-									Checking availability...
-								</span>
+							<div className="text-center py-8 text-cream/80 font-sans">
+								Loading available times...
 							</div>
 						) : timeSlots.length === 0 ? (
-							<p className="text-sm text-muted-foreground py-4">
+							<p className="text-center py-8 text-cream/80 font-sans">
 								No available times for this date. Please select another day.
 							</p>
 						) : (
-							<div className="grid grid-cols-3 gap-2">
+							<div className="grid grid-cols-2 md:grid-cols-4 gap-3">
 								{timeSlots.map((slot) => (
 									<button
 										key={slot.time}
 										onClick={() => slot.available && setSelectedTime(slot.time)}
 										disabled={!slot.available}
 										className={cn(
-											"p-3 rounded-lg border-2 text-sm font-medium transition-all",
+											"p-3 rounded-[24px] text-center transition-all font-sans font-medium",
 											selectedTime === slot.time
-												? "border-primary bg-primary/5 text-foreground"
+												? "bg-rose text-cream shadow-lg scale-105"
 												: slot.available
-												? "border-border text-muted-foreground hover:text-foreground hover:border-primary/50"
-												: "border-border bg-muted text-muted-foreground/50 cursor-not-allowed opacity-50"
+												? "bg-rose/30 text-cream hover:bg-rose/50 hover:scale-105"
+												: "bg-charcoal/20 text-cream/40 cursor-not-allowed"
 										)}
 									>
 										{slot.time}
@@ -384,57 +376,77 @@ export function CalendarBooking() {
 
 				{/* STEP 3: Client Information Form (shows when time is selected) */}
 				{selectedTime && (
-					<div className="space-y-4 pt-4 border-t border-border">
-						<h3 className="font-semibold text-foreground mb-3">
+					<div className="space-y-6">
+						<h3 className="text-base font-bold text-cream mb-4 font-sans">
 							Your Information
 						</h3>
 
 						<div className="space-y-2">
-							<Label htmlFor="name">
-								Full Name <span className="text-destructive">*</span>
-							</Label>
-							<Input
+							<label
+								htmlFor="name"
+								className="text-cream font-medium font-sans"
+							>
+								Name *
+							</label>
+							<input
 								id="name"
-								placeholder="John Doe"
+								placeholder="Your full name"
 								value={clientName}
 								onChange={(e) => setClientName(e.target.value)}
 								required
+								className="w-full bg-rose/20 border-rose/30 text-cream placeholder:text-cream/50 rounded-[16px] font-sans px-4 py-3 border focus:outline-none focus:border-rose transition-colors"
 							/>
 						</div>
 
 						<div className="space-y-2">
-							<Label htmlFor="email">
-								Email <span className="text-destructive">*</span>
-							</Label>
-							<Input
+							<label
+								htmlFor="email"
+								className="text-cream font-medium font-sans"
+							>
+								Email *
+							</label>
+							<input
 								id="email"
 								type="email"
-								placeholder="john@example.com"
+								placeholder="your@email.com"
 								value={clientEmail}
 								onChange={(e) => setClientEmail(e.target.value)}
 								required
+								className="w-full bg-rose/20 border-rose/30 text-cream placeholder:text-cream/50 rounded-[16px] font-sans px-4 py-3 border focus:outline-none focus:border-rose transition-colors"
 							/>
 						</div>
 
 						<div className="space-y-2">
-							<Label htmlFor="phone">Phone Number</Label>
-							<Input
+							<label
+								htmlFor="phone"
+								className="text-cream font-medium font-sans"
+							>
+								Phone
+							</label>
+							<input
 								id="phone"
 								type="tel"
-								placeholder="+1 (555) 123-4567"
+								placeholder="(555) 123-4567"
 								value={clientPhone}
 								onChange={(e) => setClientPhone(e.target.value)}
+								className="w-full bg-rose/20 border-rose/30 text-cream placeholder:text-cream/50 rounded-[16px] font-sans px-4 py-3 border focus:outline-none focus:border-rose transition-colors"
 							/>
 						</div>
 
 						<div className="space-y-2">
-							<Label htmlFor="message">Message (Optional)</Label>
-							<Textarea
+							<label
+								htmlFor="message"
+								className="text-cream font-medium font-sans"
+							>
+								What would you like to discuss?
+							</label>
+							<textarea
 								id="message"
-								placeholder="Tell us what you'd like to discuss..."
+								placeholder="Tell us about your project or goals..."
 								value={message}
 								onChange={(e) => setMessage(e.target.value)}
 								rows={3}
+								className="w-full bg-rose/20 border-rose/30 text-cream placeholder:text-cream/50 rounded-[16px] min-h-[100px] font-sans px-4 py-3 border focus:outline-none focus:border-rose transition-colors resize-none"
 							/>
 						</div>
 					</div>
@@ -442,33 +454,17 @@ export function CalendarBooking() {
 
 				{/* STEP 4: Booking Summary & Confirm Button */}
 				{selectedDate && selectedTime && (
-					<div className="pt-4 border-t border-border space-y-4">
-						<div className="bg-secondary/5 rounded-lg p-4">
-							<p className="text-sm text-muted-foreground mb-1">
-								Your selected time:
-							</p>
-							<p className="text-lg font-semibold text-foreground">
-								{formatDate(selectedDate)} at {selectedTime}
-							</p>
-						</div>
-						<Button
+					<div className="space-y-4">
+						<button
 							onClick={handleBooking}
-							className="w-full"
-							size="lg"
+							className="w-full bg-rose text-charcoal hover:bg-rose/90 font-bold rounded-full py-6 font-sans disabled:opacity-50 disabled:cursor-not-allowed transition-all"
 							disabled={isBooking || !clientName || !clientEmail}
 						>
-							{isBooking ? (
-								<>
-									<Loader2 className="w-4 h-4 mr-2 animate-spin" />
-									Confirming...
-								</>
-							) : (
-								"Confirm Booking"
-							)}
-						</Button>
+							{isBooking ? "Booking..." : "Confirm Booking"}
+						</button>
 					</div>
 				)}
-			</CardContent>
-		</Card>
+			</div>
+		</div>
 	);
 }

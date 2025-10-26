@@ -1,51 +1,143 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
+﻿"use client";
+
+import { useState } from "react";
+import { Menu, X, Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 /**
  * Site header component with navigation
- * Displays logo and navigation links with responsive design
+ * Magazine-style fixed header with search functionality
  */
 export function Header() {
-  return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-secondary">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-xl font-serif font-bold text-secondary-foreground">Cher Digital Analytics</span>
-        </Link>
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const [isSearchOpen, setIsSearchOpen] = useState(false);
 
-        <nav className="hidden md:flex items-center gap-6">
-          <Link
-            href="/#what-we-do"
-            className="text-sm font-medium text-secondary-foreground/80 hover:text-secondary-foreground transition-colors"
-          >
-            What We Do
-          </Link>
-          <Link
-            href="/#testimonials"
-            className="text-sm font-medium text-secondary-foreground/80 hover:text-secondary-foreground transition-colors"
-          >
-            Testimonials
-          </Link>
-          <Link
-            href="/#faq"
-            className="text-sm font-medium text-secondary-foreground/80 hover:text-secondary-foreground transition-colors"
-          >
-            FAQ
-          </Link>
-          <Link href="/contact">
-            <Button size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-              Contact Us
-            </Button>
-          </Link>
-        </nav>
+	return (
+		<header className="fixed top-0 left-0 right-0 z-50 bg-olive/95 backdrop-blur-sm border-b border-cream/10">
+			<div className="container mx-auto px-6 py-4">
+				<div className="flex items-center justify-between">
+					<Link
+						href="/"
+						className="text-2xl md:text-3xl font-bold tracking-tight text-cream hover:text-rose transition-colors"
+					>
+						Cher Digital
+					</Link>
 
-        {/* Mobile menu button */}
-        <Link href="/contact" className="md:hidden">
-          <Button size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-            Contact
-          </Button>
-        </Link>
-      </div>
-    </header>
-  )
+					<nav className="hidden md:flex items-center gap-8">
+						<a
+							href="/#what-we-do"
+							className="text-cream hover:text-rose transition-colors text-sm tracking-widest uppercase font-mono"
+						>
+							What We Do
+						</a>
+						<Link
+							href="/packages"
+							className="text-cream hover:text-rose transition-colors text-sm tracking-widest uppercase font-mono"
+						>
+							Packages
+						</Link>
+						<a
+							href="/#process"
+							className="text-cream hover:text-rose transition-colors text-sm tracking-widest uppercase font-mono"
+						>
+							Process
+						</a>
+						<a
+							href="/#testimonials"
+							className="text-cream hover:text-rose transition-colors text-sm tracking-widest uppercase font-mono"
+						>
+							Testimonials
+						</a>
+						<a
+							href="/#faq"
+							className="text-cream hover:text-rose transition-colors text-sm tracking-widest uppercase font-mono"
+						>
+							FAQ
+						</a>
+
+						<div className="flex items-center gap-2">
+							<div
+								className={`overflow-hidden transition-all duration-500 ease-in-out ${
+									isSearchOpen ? "w-64 opacity-100" : "w-0 opacity-0"
+								}`}
+							>
+								<input
+									type="text"
+									placeholder="Search..."
+									className="w-full px-4 py-2 bg-charcoal/50 border border-cream/30 rounded-full text-cream placeholder:text-cream/50 focus:outline-none focus:border-rose transition-colors"
+									autoFocus={isSearchOpen}
+								/>
+							</div>
+							<button
+								onClick={() => setIsSearchOpen(!isSearchOpen)}
+								className="text-cream hover:text-rose transition-colors p-2"
+								aria-label="Search"
+							>
+								<Search size={20} />
+							</button>
+						</div>
+
+						<Link href="/contact">
+							<Button className="bg-rose text-charcoal hover:bg-burgundy hover:text-cream transition-all rounded-full">
+								Contact Us
+							</Button>
+						</Link>
+					</nav>
+
+					<button
+						onClick={() => setIsMenuOpen(!isMenuOpen)}
+						className="md:hidden text-cream"
+					>
+						{isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+					</button>
+				</div>
+
+				{isMenuOpen && (
+					<nav className="md:hidden mt-6 pb-4 flex flex-col gap-4">
+						<a
+							href="/#what-we-do"
+							className="text-cream hover:text-rose transition-colors text-sm tracking-widest uppercase font-mono"
+							onClick={() => setIsMenuOpen(false)}
+						>
+							What We Do
+						</a>
+						<Link
+							href="/packages"
+							className="text-cream hover:text-rose transition-colors text-sm tracking-widest uppercase font-mono"
+							onClick={() => setIsMenuOpen(false)}
+						>
+							Packages
+						</Link>
+						<a
+							href="/#process"
+							className="text-cream hover:text-rose transition-colors text-sm tracking-widest uppercase font-mono"
+							onClick={() => setIsMenuOpen(false)}
+						>
+							Process
+						</a>
+						<a
+							href="/#testimonials"
+							className="text-cream hover:text-rose transition-colors text-sm tracking-widest uppercase font-mono"
+							onClick={() => setIsMenuOpen(false)}
+						>
+							Testimonials
+						</a>
+						<a
+							href="/#faq"
+							className="text-cream hover:text-rose transition-colors text-sm tracking-widest uppercase font-mono"
+							onClick={() => setIsMenuOpen(false)}
+						>
+							FAQ
+						</a>
+						<Link href="/contact" onClick={() => setIsMenuOpen(false)}>
+							<Button className="bg-rose text-charcoal hover:bg-burgundy hover:text-cream transition-all w-full rounded-full">
+								Contact Us
+							</Button>
+						</Link>
+					</nav>
+				)}
+			</div>
+		</header>
+	);
 }
