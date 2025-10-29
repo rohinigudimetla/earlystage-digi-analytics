@@ -29,7 +29,7 @@ export function WhatWeDoSection() {
 			icon: BarChart3,
 			title: "Simple Dashboards",
 			description:
-				"We create easy-to-understand dashboards that show you exactly what's working and what's notno confusing jargon, just clear insights.",
+				"We create easy-to-understand dashboards that show you exactly what's working and what's not, no confusing jargon, just clear insights.",
 		},
 		{
 			icon: TrendingUp,
