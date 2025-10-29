@@ -83,7 +83,7 @@ export default function Page() {
 				<RefinedHero />
 				<WhatWeDoSection />
 				<ProcessSection />
-				<TestimonialsSection />
+				{/* <TestimonialsSection /> */}
 				<FAQSection />
 				<CTASection />
 				<Footer />
