@@ -20,6 +20,9 @@ const outfit = Outfit({
 export const metadata: Metadata = {
 	title: "Cher Digital Analytics - Local Business Insights",
 	description: "Simple analytics for local businesses",
+	icons: {
+		icon: "/cher-favicon.png",
+	},
 };
 
 export const viewport = {
