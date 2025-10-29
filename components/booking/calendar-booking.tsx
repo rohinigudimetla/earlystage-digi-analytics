@@ -288,7 +288,7 @@ export function CalendarBooking() {
 	return (
 		<div
 			ref={timeSectionRef}
-			className="bg-burgundy rounded-[32px] font-sans p-8"
+			className="bg-burgundy rounded-[32px] font-sans p-6 md:p-8"
 		>
 			<div className="mb-8">
 				<div className="w-12 h-12 rounded-full bg-rose/20 flex items-center justify-center mb-4">
@@ -316,7 +316,7 @@ export function CalendarBooking() {
 						<Calendar className="w-4 h-4" />
 						Select a Date
 					</h3>
-					<div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+					<div className="grid grid-cols-1 md:grid-cols-3 gap-3">
 						{availableDates.slice(0, 9).map((date, index) => (
 							<button
 								key={index}
@@ -351,14 +351,14 @@ export function CalendarBooking() {
 								No available times for this date. Please select another day.
 							</p>
 						) : (
-							<div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+							<div className="grid grid-cols-1 md:grid-cols-4 gap-3">
 								{timeSlots.map((slot) => (
 									<button
 										key={slot.time}
 										onClick={() => slot.available && setSelectedTime(slot.time)}
 										disabled={!slot.available}
 										className={cn(
-											"p-3 rounded-[24px] text-center transition-all font-sans font-medium",
+											"p-4 md:p-3 rounded-[24px] text-center transition-all font-sans font-medium",
 											selectedTime === slot.time
 												? "bg-rose text-cream shadow-lg scale-105"
 												: slot.available
@@ -394,7 +394,7 @@ export function CalendarBooking() {
 								value={clientName}
 								onChange={(e) => setClientName(e.target.value)}
 								required
-								className="w-full bg-rose/20 border-rose/30 text-cream placeholder:text-cream/50 rounded-[16px] font-sans px-4 py-3 border focus:outline-none focus:border-rose transition-colors"
+								className="w-full bg-rose/20 border-rose/30 text-cream placeholder:text-cream/50 rounded-[16px] font-sans px-6 py-3 border focus:outline-none focus:border-rose transition-colors"
 							/>
 						</div>
 
@@ -412,7 +412,7 @@ export function CalendarBooking() {
 								value={clientEmail}
 								onChange={(e) => setClientEmail(e.target.value)}
 								required
-								className="w-full bg-rose/20 border-rose/30 text-cream placeholder:text-cream/50 rounded-[16px] font-sans px-4 py-3 border focus:outline-none focus:border-rose transition-colors"
+								className="w-full bg-rose/20 border-rose/30 text-cream placeholder:text-cream/50 rounded-[16px] font-sans px-6 py-3 border focus:outline-none focus:border-rose transition-colors"
 							/>
 						</div>
 
@@ -429,7 +429,7 @@ export function CalendarBooking() {
 								placeholder="(555) 123-4567"
 								value={clientPhone}
 								onChange={(e) => setClientPhone(e.target.value)}
-								className="w-full bg-rose/20 border-rose/30 text-cream placeholder:text-cream/50 rounded-[16px] font-sans px-4 py-3 border focus:outline-none focus:border-rose transition-colors"
+								className="w-full bg-rose/20 border-rose/30 text-cream placeholder:text-cream/50 rounded-[16px] font-sans px-6 py-3 border focus:outline-none focus:border-rose transition-colors"
 							/>
 						</div>
 
@@ -446,7 +446,7 @@ export function CalendarBooking() {
 								value={message}
 								onChange={(e) => setMessage(e.target.value)}
 								rows={3}
-								className="w-full bg-rose/20 border-rose/30 text-cream placeholder:text-cream/50 rounded-[16px] min-h-[100px] font-sans px-4 py-3 border focus:outline-none focus:border-rose transition-colors resize-none"
+								className="w-full bg-rose/20 border-rose/30 text-cream placeholder:text-cream/50 rounded-[16px] min-h-[100px] font-sans px-6 py-3 border focus:outline-none focus:border-rose transition-colors resize-none"
 							/>
 						</div>
 					</div>

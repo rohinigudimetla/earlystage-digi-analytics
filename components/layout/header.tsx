@@ -65,7 +65,7 @@ export function Header() {
 								<input
 									type="text"
 									placeholder="Search..."
-									className="w-full px-4 py-2 bg-charcoal/50 border border-cream/30 rounded-full text-cream placeholder:text-cream/50 focus:outline-none focus:border-rose transition-colors"
+									className="w-full px-6 py-2 bg-charcoal/50 border border-cream/30 rounded-full text-cream placeholder:text-cream/50 focus:outline-none focus:border-rose transition-colors"
 									autoFocus={isSearchOpen}
 								/>
 							</div>

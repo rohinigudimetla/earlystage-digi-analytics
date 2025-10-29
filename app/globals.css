@@ -145,22 +145,16 @@ html {
 	scroll-behavior: smooth;
 }
 
-/* Custom scrollbar with rose accent */
-::-webkit-scrollbar {
-	width: 8px;
+/* Hide scrollbar for all browsers */
+/* Firefox */
+* {
+	scrollbar-width: none;
+	-ms-overflow-style: none; /* IE and Edge */
 }
 
-::-webkit-scrollbar-track {
-	background: #3d4436;
-}
-
-::-webkit-scrollbar-thumb {
-	background: #c49797;
-	border-radius: 0;
-}
-
-::-webkit-scrollbar-thumb:hover {
-	background: #834a49;
+/* Chrome, Safari and Opera */
+*::-webkit-scrollbar {
+	display: none;
 }
 
 /* Selection color */

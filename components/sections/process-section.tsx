@@ -59,31 +59,31 @@ export function ProcessSection() {
 		<section
 			ref={sectionRef}
 			id="process"
-			className="py-24 px-6 bg-gradient-subtle relative overflow-hidden"
+			className="py-16 md:py-24 px-4 sm:px-6 bg-gradient-subtle relative overflow-hidden"
 		>
 			<div className="absolute inset-0 opacity-10">
-				<div className="absolute top-20 right-20 w-96 h-96 bg-rose rounded-full blur-3xl" />
-				<div className="absolute bottom-20 left-20 w-96 h-96 bg-burgundy rounded-full blur-3xl" />
+				<div className="absolute top-10 md:top-20 right-10 md:right-20 w-64 md:w-96 h-64 md:h-96 bg-rose rounded-full blur-3xl" />
+				<div className="absolute bottom-10 md:bottom-20 left-10 md:left-20 w-64 md:w-96 h-64 md:h-96 bg-burgundy rounded-full blur-3xl" />
 			</div>
 
-			<div className="max-w-7xl mx-auto relative z-10 bg-olive/50 rounded-[48px] p-8 md:p-12 shadow-xl">
+			<div className="w-full md:max-w-7xl mx-auto relative z-10 md:bg-olive/50 md:rounded-[48px] py-8 md:p-12 md:shadow-xl">
 				<div
-					className={`text-center mb-16 transition-all duration-1000 ${
+					className={`mb-12 md:mb-16 transition-all duration-1000 ${
 						isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
 					}`}
 				>
-					<h2 className="text-4xl md:text-5xl font-black text-cream mb-6 uppercase tracking-tight">
+					<h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-black text-cream mb-4 md:mb-6 uppercase tracking-tight">
 						What to Expect
 					</h2>
-					<p className="text-lg text-cream/70 max-w-3xl mx-auto leading-relaxed">
+					<p className="text-center text-base md:text-lg text-cream/70 leading-relaxed">
 						Simple, personal, and straightforward—here's how we work together.
 					</p>
 				</div>
 
-				<div className="relative max-w-4xl mx-auto">
+				<div className="relative md:max-w-4xl md:mx-auto">
 					<div className="absolute left-1/2 top-0 bottom-0 w-1 bg-cream/30 -translate-x-1/2 hidden md:block" />
 
-					<div className="space-y-12">
+					<div className="space-y-6 md:space-y-12">
 						{steps.map((step, index) => {
 							const Icon = step.icon;
 							const isEven = index % 2 === 0;
@@ -100,21 +100,43 @@ export function ProcessSection() {
 									}`}
 									style={{ transitionDelay: `${index * 150}ms` }}
 								>
+									<div className="md:hidden">
+										<div className="border-4 border-cream/30 rounded-3xl p-6 bg-olive/20 hover:bg-burgundy/10 hover:border-burgundy transition-all duration-500">
+											{/* Icon at top of card */}
+											<div className="flex items-center justify-center mb-4">
+												<div className="w-16 h-16 bg-burgundy rounded-full flex items-center justify-center border-4 border-cream/30 shadow-lg">
+													<Icon className="w-8 h-8 text-cream" />
+												</div>
+											</div>
+
+											{/* Card content */}
+											<div className="text-center">
+												<h3 className="text-xl font-bold text-cream mb-2">
+													{step.title}
+												</h3>
+												<p className="text-sm text-cream/70 leading-relaxed">
+													{step.description}
+												</p>
+											</div>
+										</div>
+									</div>
+
+									{/* Desktop Layout: Alternating with center line */}
 									<div
-										className={`flex items-center gap-8 ${
-											isEven ? "md:flex-row" : "md:flex-row-reverse"
+										className={`hidden md:flex items-center gap-8 ${
+											isEven ? "flex-row" : "flex-row-reverse"
 										}`}
 									>
 										{/* Content card */}
 										<div className="flex-1">
 											<div
 												className={`border-4 border-cream/30 rounded-[28px] p-6 hover:bg-burgundy/10 hover:border-burgundy hover:scale-105 transition-all duration-500 ${
-													isEven ? "md:text-right" : "md:text-left"
+													isEven ? "text-right" : "text-left"
 												}`}
 											>
 												<div
 													className={`flex items-center gap-4 mb-4 ${
-														isEven ? "md:justify-end" : "md:justify-start"
+														isEven ? "justify-end" : "justify-start"
 													}`}
 												>
 													<span className="text-5xl font-black text-burgundy/40">
@@ -124,18 +146,19 @@ export function ProcessSection() {
 														{step.title}
 													</h3>
 												</div>
-												<p className="text-cream/70 leading-relaxed">
+												<p className="text-base text-cream/70 leading-relaxed">
 													{step.description}
 												</p>
 											</div>
 										</div>
 
-										<div className="hidden md:flex w-20 h-20 bg-burgundy rounded-full items-center justify-center flex-shrink-0 relative z-10 border-4 border-cream/30 shadow-lg">
+										{/* Center icon */}
+										<div className="flex w-20 h-20 bg-burgundy rounded-full items-center justify-center flex-shrink-0 relative z-10 border-4 border-cream/30 shadow-lg">
 											<Icon className="w-10 h-10 text-cream" />
 										</div>
 
 										{/* Spacer for alternating layout */}
-										<div className="flex-1 hidden md:block" />
+										<div className="flex-1" />
 									</div>
 								</div>
 							);

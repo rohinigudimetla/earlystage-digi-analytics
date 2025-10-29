@@ -152,24 +152,22 @@ export default function PackagesPage() {
 
 			<div className="relative min-h-screen bg-olive overflow-hidden z-10">
 				<Navbar />
-
 				{/* Hero Section */}
-				<section className="pt-32 pb-20 px-6">
+				<section className="pt-24 pb-8 md:pt-32 md:pb-20 px-6">
 					<div className="max-w-6xl mx-auto text-center">
-						<h1 className="text-5xl md:text-7xl font-black text-cream mb-6 uppercase tracking-tight">
+						<h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black text-cream mb-6 uppercase tracking-tight">
 							Choose Your Growth Path
 						</h1>
-						<p className="text-xl md:text-2xl text-cream/70 max-w-3xl mx-auto leading-relaxed">
+						<p className="text-base sm:text-lg md:text-xl text-cream/70 max-w-full md:max-w-3xl mx-auto leading-relaxed">
 							Transparent pricing. No hidden fees. No surprises. Just results
 							that fill your chairs.
 						</p>
 					</div>
-				</section>
-
+				</section>{" "}
 				{/* Packages Grid */}
-				<section ref={sectionRef} className="py-20 px-6">
+				<section ref={sectionRef} className="py-8 md:py-20 px-6">
 					<div className="max-w-7xl mx-auto">
-						<div className="grid md:grid-cols-3 gap-8">
+						<div className="grid md:grid-cols-3 gap-6 md:gap-8">
 							{packages.map((pkg, index) => {
 								const Icon = pkg.icon;
 								return (
@@ -185,30 +183,32 @@ export default function PackagesPage() {
 										style={{ transitionDelay: `${index * 100}ms` }}
 									>
 										{pkg.popular && (
-											<div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-burgundy text-cream px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
+											<div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-burgundy text-cream px-4 py-1 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider">
 												Most Popular
 											</div>
 										)}
 
 										<div className="flex items-center gap-4 mb-6">
 											<div
-												className={`w-16 h-16 rounded-full bg-${pkg.color} flex items-center justify-center`}
+												className={`w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-${pkg.color} flex items-center justify-center flex-shrink-0`}
 											>
-												<Icon className="w-8 h-8 text-cream" />
+												<Icon className="w-6 h-6 sm:w-8 sm:h-8 text-cream" />
 											</div>
-											<h3 className="text-2xl font-black text-cream">
+											<h3 className="text-lg sm:text-xl md:text-2xl font-black text-cream">
 												{pkg.name}
 											</h3>
 										</div>
 
 										<div className="mb-6">
 											<div className="flex items-baseline gap-2">
-												<span className="text-4xl font-black text-cream">
+												<span className="text-2xl sm:text-3xl md:text-4xl font-black text-cream">
 													{pkg.price}
 												</span>
-												<span className="text-cream/60">{pkg.period}</span>
+												<span className="text-sm sm:text-base text-cream/60">
+													{pkg.period}
+												</span>
 											</div>
-											<p className="text-cream/70 mt-2 leading-relaxed">
+											<p className="text-sm sm:text-base text-cream/70 mt-2 leading-relaxed">
 												{pkg.description}
 											</p>
 										</div>
@@ -255,14 +255,13 @@ export default function PackagesPage() {
 						</div>
 					</div>
 				</section>
-
 				{/* CTA Section */}
-				<section className="py-32 px-6">
+				<section className="py-12 md:py-32 px-6">
 					<div className="max-w-4xl mx-auto text-center">
-						<h2 className="text-4xl md:text-5xl font-black text-cream mb-6 uppercase tracking-tight">
+						<h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-cream mb-6 uppercase tracking-tight">
 							Ready to Grow Your Salon?
 						</h2>
-						<p className="text-xl text-cream/70 mb-8 leading-relaxed">
+						<p className="text-base sm:text-lg md:text-xl text-cream/70 mb-8 leading-relaxed">
 							Book a free consultation and get a complimentary site audit. No
 							pressure, just insights.
 						</p>
@@ -274,7 +273,6 @@ export default function PackagesPage() {
 						</a>
 					</div>
 				</section>
-
 				<Footer />
 			</div>
 		</>

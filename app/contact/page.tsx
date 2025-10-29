@@ -64,10 +64,10 @@ export default function ContactPage() {
 				<main className="relative pt-32 pb-20 px-6 z-10">
 					<div className="max-w-6xl mx-auto">
 						<div className="text-center mb-16">
-							<h1 className="text-5xl md:text-6xl font-black text-cream mb-6">
+							<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-cream mb-6">
 								Let's Talk About Your Business
 							</h1>
-							<p className="text-xl text-cream/70 leading-relaxed max-w-3xl mx-auto">
+							<p className="text-base sm:text-lg md:text-xl text-cream/70 leading-relaxed max-w-3xl mx-auto">
 								Ready to get started? Book a free consultation or reach out to
 								us directly—all reports and communications are handled
 								personally via email and phone.
@@ -77,43 +77,47 @@ export default function ContactPage() {
 							<CalendarBooking />
 						</div>
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-							<div className="bg-cream/10 backdrop-blur-sm border-4 border-cream rounded-[32px] p-8 md:p-12 hover:scale-105 hover:shadow-2xl transition-all duration-500">
-								<div className="w-16 h-16 rounded-full bg-cream/20 flex items-center justify-center mb-6">
+							<div className="bg-cream/10 backdrop-blur-sm border-4 border-cream rounded-[32px] p-8 md:p-12 hover:scale-105 hover:shadow-2xl transition-all duration-500 text-center md:text-left">
+								<div className="w-16 h-16 rounded-full bg-cream/20 flex items-center justify-center mb-6 mx-auto md:mx-0">
 									<Phone className="w-8 h-8 text-cream" />
 								</div>
-								<h2 className="text-3xl font-black text-cream mb-3">Call Us</h2>
+								<h2 className="text-2xl md:text-3xl font-black text-cream mb-3">
+									Call Us
+								</h2>
 								<p className="text-cream/70 mb-6 leading-relaxed">
 									Speak directly with our team
 								</p>
-								<p className="text-2xl font-bold text-cream">(555) 123-4567</p>
+								<p className="text-xl md:text-2xl font-bold text-cream">
+									(555) 123-4567
+								</p>
 							</div>
 
-							<div className="bg-cream/10 backdrop-blur-sm border-4 border-cream rounded-[32px] p-8 md:p-12 hover:scale-105 hover:shadow-2xl transition-all duration-500">
-								<div className="w-16 h-16 rounded-full bg-cream/20 flex items-center justify-center mb-6">
+							<div className="bg-cream/10 backdrop-blur-sm border-4 border-cream rounded-[32px] p-8 md:p-12 hover:scale-105 hover:shadow-2xl transition-all duration-500 text-center md:text-left">
+								<div className="w-16 h-16 rounded-full bg-cream/20 flex items-center justify-center mb-6 mx-auto md:mx-0">
 									<Mail className="w-8 h-8 text-cream" />
 								</div>
-								<h2 className="text-3xl font-black text-cream mb-3">
+								<h2 className="text-2xl md:text-3xl font-black text-cream mb-3">
 									Email Us
 								</h2>
 								<p className="text-cream/70 mb-6 leading-relaxed">
 									We'll respond within 24 hours
 								</p>
-								<p className="text-2xl font-bold text-cream">
+								<p className="text-xl md:text-2xl font-bold text-cream break-all">
 									hello@cherdigital.com
 								</p>
 							</div>
-						</div>{" "}
-						<div className="bg-olive/50 backdrop-blur-sm rounded-[48px] p-8 md:p-12 mb-12">
+						</div>
+						<div className="bg-olive/50 backdrop-blur-sm rounded-[32px] md:rounded-[48px] py-8 px-6 md:p-12 mb-12">
 							<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-								<div className="flex gap-4">
-									<div className="w-12 h-12 rounded-full bg-rose/20 flex items-center justify-center flex-shrink-0">
+								<div className="text-center md:text-left md:flex md:gap-4">
+									<div className="w-12 h-12 rounded-full bg-rose/20 flex items-center justify-center mx-auto md:mx-0 mb-4 md:mb-0 md:flex-shrink-0">
 										<Clock className="w-6 h-6 text-rose" />
 									</div>
 									<div>
-										<h3 className="text-xl font-bold text-cream mb-3">
+										<h3 className="text-lg md:text-xl font-bold text-cream mb-3">
 											Business Hours
 										</h3>
-										<p className="text-cream/70 leading-relaxed">
+										<p className="text-sm md:text-base text-cream/70 leading-relaxed">
 											Monday - Friday: 9:00 AM - 6:00 PM PST
 											<br />
 											Saturday: 10:00 AM - 2:00 PM PST
@@ -123,15 +127,15 @@ export default function ContactPage() {
 									</div>
 								</div>
 
-								<div className="flex gap-4">
-									<div className="w-12 h-12 rounded-full bg-rose/20 flex items-center justify-center flex-shrink-0">
+								<div className="text-center md:text-left md:flex md:gap-4">
+									<div className="w-12 h-12 rounded-full bg-rose/20 flex items-center justify-center mx-auto md:mx-0 mb-4 md:mb-0 md:flex-shrink-0">
 										<MapPin className="w-6 h-6 text-rose" />
 									</div>
 									<div>
-										<h3 className="text-xl font-bold text-cream mb-3">
+										<h3 className="text-lg md:text-xl font-bold text-cream mb-3">
 											Service Area
 										</h3>
-										<p className="text-cream/70 leading-relaxed">
+										<p className="text-sm md:text-base text-cream/70 leading-relaxed">
 											We serve local businesses across the United States. Remote
 											consultations available nationwide.
 										</p>
@@ -140,7 +144,7 @@ export default function ContactPage() {
 							</div>
 						</div>
 						<div className="text-center mb-12">
-							<h2 className="text-4xl font-black text-cream mb-12">
+							<h2 className="text-3xl md:text-4xl font-black text-cream mb-12">
 								What Happens Next?
 							</h2>
 							<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -148,10 +152,10 @@ export default function ContactPage() {
 									<div className="w-16 h-16 rounded-full bg-rose/20 flex items-center justify-center mx-auto mb-6 text-rose font-black text-2xl">
 										1
 									</div>
-									<h3 className="text-xl font-bold text-cream mb-4">
+									<h3 className="text-lg md:text-xl font-bold text-cream mb-4">
 										Initial Conversation
 									</h3>
-									<p className="text-cream/70 leading-relaxed">
+									<p className="text-sm md:text-base text-cream/70 leading-relaxed">
 										We'll discuss your business goals and current analytics
 										setup—no forms, just a friendly chat.
 									</p>
@@ -160,10 +164,10 @@ export default function ContactPage() {
 									<div className="w-16 h-16 rounded-full bg-rose/20 flex items-center justify-center mx-auto mb-6 text-rose font-black text-2xl">
 										2
 									</div>
-									<h3 className="text-xl font-bold text-cream mb-4">
+									<h3 className="text-lg md:text-xl font-bold text-cream mb-4">
 										Personal Onboarding
 									</h3>
-									<p className="text-cream/70 leading-relaxed">
+									<p className="text-sm md:text-base text-cream/70 leading-relaxed">
 										We'll set up tracking for your tools and get everything
 										ready for your first report.
 									</p>
@@ -172,10 +176,10 @@ export default function ContactPage() {
 									<div className="w-16 h-16 rounded-full bg-rose/20 flex items-center justify-center mx-auto mb-6 text-rose font-black text-2xl">
 										3
 									</div>
-									<h3 className="text-xl font-bold text-cream mb-4">
+									<h3 className="text-lg md:text-xl font-bold text-cream mb-4">
 										Monthly Email Reports
 									</h3>
-									<p className="text-cream/70 leading-relaxed">
+									<p className="text-sm md:text-base text-cream/70 leading-relaxed">
 										Receive clear, actionable insights every month, with ongoing
 										support whenever you need it.
 									</p>

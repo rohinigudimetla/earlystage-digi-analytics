@@ -51,7 +51,7 @@ export default function RefinedHero() {
 									: "opacity-0 translate-y-20"
 							}`}
 						>
-							<h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-cream uppercase tracking-tight leading-none mb-0 relative h-[200px] md:h-[250px] mx-auto">
+							<h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black text-cream uppercase tracking-tight leading-none mb-0 relative h-[180px] sm:h-[160px] md:h-[250px] mx-auto px-6">
 								{headlines.map((headline, index) => (
 									<span
 										key={index}
@@ -65,7 +65,7 @@ export default function RefinedHero() {
 									</span>
 								))}
 							</h1>
-							<p className="text-lg md:text-xl text-cream/70 leading-relaxed max-w-2xl mx-auto mb-8">
+							<p className="text-base md:text-xl text-cream/70 leading-relaxed max-w-2xl mx-auto mb-8 px-6">
 								Get honest insights, easy reports and support you can trust.
 							</p>
 
@@ -76,19 +76,19 @@ export default function RefinedHero() {
 										: "opacity-0 translate-y-20"
 								}`}
 							>
-								<a href="/audit">
+								<a href="/audit" className="w-full sm:w-auto">
 									<Button
 										size="lg"
-										className="bg-rose text-charcoal hover:bg-burgundy hover:text-cream font-bold rounded-full font-sans"
+										className="w-full sm:w-auto bg-rose text-charcoal hover:bg-burgundy hover:text-cream font-bold rounded-full font-sans"
 									>
 										Book a Free Audit
 									</Button>
 								</a>
-								<a href="/packages">
+								<a href="/packages" className="w-full sm:w-auto">
 									<Button
 										size="lg"
 										variant="outline"
-										className="!border-2 !border-cream !text-cream hover:!bg-cream hover:!text-olive font-bold !bg-transparent rounded-full font-sans"
+										className="w-full sm:w-auto !border-2 !border-cream !text-cream hover:!bg-cream hover:!text-olive font-bold !bg-transparent rounded-full font-sans"
 									>
 										Learn More
 									</Button>

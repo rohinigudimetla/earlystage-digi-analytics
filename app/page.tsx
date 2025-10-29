@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import RefinedHero from "@/components/sections/hero-section";
-import { WhatWeDoSection as WhatWeDo } from "@/components/sections/what-we-do-section";
+import { WhatWeDoSection } from "@/components/sections/what-we-do-section";
 import { ProcessSection } from "@/components/sections/process-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import { FAQSection } from "@/components/sections/faq-section";
@@ -81,7 +81,7 @@ export default function Page() {
 
 			<main className="relative min-h-screen bg-olive overflow-hidden z-10">
 				<RefinedHero />
-				<WhatWeDo />
+				<WhatWeDoSection />
 				<ProcessSection />
 				<TestimonialsSection />
 				<FAQSection />

@@ -1,5 +1,5 @@
-import type React from "react";
-import type { Metadata } from "next";
+import React from "react";
+import { Metadata } from "next";
 import { Space_Grotesk, Outfit } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { Suspense } from "react";
@@ -20,6 +20,11 @@ const outfit = Outfit({
 export const metadata: Metadata = {
 	title: "Cher Digital Analytics - Local Business Insights",
 	description: "Simple analytics for local businesses",
+};
+
+export const viewport = {
+	width: "device-width",
+	initialScale: 1,
 };
 
 export default function RootLayout({

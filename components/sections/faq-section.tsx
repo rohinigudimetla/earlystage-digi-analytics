@@ -61,44 +61,46 @@ export function FAQSection() {
 	];
 
 	return (
-		<section ref={sectionRef} id="faq" className="py-32 px-6 bg-olive">
-			<div className="max-w-4xl mx-auto bg-olive/50 backdrop-blur-sm rounded-[48px] p-8 md:p-12 pb-48 shadow-xl">
+		<section
+			ref={sectionRef}
+			id="faq"
+			className="py-8 md:py-32 px-4 md:px-6 bg-olive"
+		>
+			<div className="w-full md:max-w-5xl mx-auto md:bg-olive/50 md:backdrop-blur-sm md:rounded-[48px] py-8 md:p-12 md:shadow-xl">
 				<div
-					className={`text-center mb-16 transition-all duration-1000 ${
+					className={`mb-8 md:mb-16 transition-all duration-1000 ${
 						isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
 					}`}
 				>
-					<h2 className="text-4xl md:text-5xl font-black text-cream mb-6 uppercase tracking-tight">
+					<h2 className="text-center text-3xl md:text-5xl font-black text-cream mb-4 md:mb-6 uppercase tracking-tight">
 						Frequently Asked Questions
 					</h2>
-					<p className="text-lg text-cream/70 max-w-3xl mx-auto leading-relaxed">
+					<p className="text-center text-base md:text-lg text-cream/70 leading-relaxed">
 						Everything you need to know about working with Cher Digital
 						Analytics.
 					</p>
 				</div>
 
 				<div
-					className={`transition-all duration-1000 delay-200 ${
+					className={`md:px-0 transition-all duration-1000 delay-200 ${
 						isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
 					}`}
 				>
 					<Accordion
 						type="single"
 						collapsible
-						className="w-full space-y-4 pb-8"
+						className="w-full space-y-3 md:space-y-4"
 					>
 						{faqs.map((faq, index) => (
 							<AccordionItem
 								key={index}
 								value={`item-${index}`}
-								className={`bg-transparent border-2 border-rose rounded-[24px] px-6 data-[state=open]:border-burgundy data-[state=open]:bg-rose/10 data-[state=open]:shadow-lg transition-all duration-300 hover:border-burgundy/70 ${
-									index === faqs.length - 1 ? "mb-6" : ""
-								}`}
+								className="bg-transparent border-2 border-rose rounded-2xl md:rounded-[24px] px-4 md:px-6 data-[state=open]:border-burgundy data-[state=open]:bg-rose/10 data-[state=open]:shadow-lg transition-all duration-300 hover:border-burgundy/70 last:!border-b-2"
 							>
-								<AccordionTrigger className="text-left font-bold text-cream hover:text-rose hover:no-underline">
+								<AccordionTrigger className="text-left font-bold text-cream hover:text-rose hover:no-underline text-sm md:text-base py-4">
 									{faq.question}
 								</AccordionTrigger>
-								<AccordionContent className="text-cream/70 leading-relaxed">
+								<AccordionContent className="text-cream/70 leading-relaxed text-sm md:text-base">
 									{faq.answer}
 								</AccordionContent>
 							</AccordionItem>
