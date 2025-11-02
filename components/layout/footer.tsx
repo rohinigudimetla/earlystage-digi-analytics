@@ -67,11 +67,11 @@ export function Footer() {
 						</h4>
 						<ul className="space-y-2 md:space-y-3">
 							<li>
-								<span className="text-cream/80 text-sm">(555) 123-4567</span>
+								<span className="text-cream/80 text-sm">(413) 377-8945</span>
 							</li>
 							<li>
 								<span className="text-cream/80 text-sm">
-									hello@cherdigital.com
+									hello@cherdigitalanalytics.com
 								</span>
 							</li>
 						</ul>
