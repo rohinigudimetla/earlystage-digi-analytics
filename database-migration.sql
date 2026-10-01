@@ -88,7 +88,7 @@ CREATE POLICY "Public can create bookings" ON bookings FOR INSERT WITH CHECK (tr
 
 -- Insert your co-founder user (MODIFY THE EMAIL AND NAME!)
 INSERT INTO users (email, name, google_calendar_id)
-VALUES ('rohinigudimetla174@gmail.com', 'Rohini Gudimetla', 'primary')
+VALUES ('admin@earlystage-analytics.com', 'Admin User', 'primary')
 ON CONFLICT (email) DO NOTHING;
 
 -- Set default availability: Monday-Friday, 9 AM - 5 PM

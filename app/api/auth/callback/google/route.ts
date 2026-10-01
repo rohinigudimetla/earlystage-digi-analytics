@@ -105,7 +105,7 @@ export async function GET(request: NextRequest) {
 				.from("users")
 				.insert({
 					email: userEmail,
-					name: "Charishma", // Default name, can be updated later
+					name: "Admin", // Default name, can be updated later
 					google_refresh_token: refreshToken,
 					google_calendar_id: userEmail,
 				})

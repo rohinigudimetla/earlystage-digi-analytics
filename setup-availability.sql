@@ -1,12 +1,12 @@
--- Set up default availability for Charishma
+-- Set up default availability for the admin user
 -- Monday-Friday, 9 AM - 5 PM
 
 DO $$
 DECLARE
   v_user_id UUID;
 BEGIN
-  -- Get Charishma's user ID
-  SELECT id INTO v_user_id FROM users WHERE email = 'charishma@cherdigitalanalytics.com' LIMIT 1;
+  -- Get the admin user's ID
+  SELECT id INTO v_user_id FROM users WHERE email = 'admin@earlystage-analytics.com' LIMIT 1;
   
   -- Delete any existing rules for this user (clean slate)
   DELETE FROM availability_rules WHERE user_id = v_user_id;

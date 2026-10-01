@@ -81,7 +81,7 @@ export async function sendClientConfirmation(params: {
             <div class="content">
               <p>Hi ${clientName},</p>
               
-              <p>Great news! Your consultation with <strong>Cher Digital Analytics</strong> has been scheduled.</p>
+              <p>Great news! Your consultation with <strong>EarlyStage Digital Analytics</strong> has been scheduled.</p>
               
               <div class="details">
                 <h3>📅 Meeting Details</h3>
@@ -270,7 +270,7 @@ export async function sendCancellationEmail(params: {
 		await resend.emails.send({
 			from: process.env.FROM_EMAIL!,
 			to: clientEmail,
-			subject: "Booking Cancelled - Cher Digital Analytics",
+			subject: "Booking Cancelled - EarlyStage Digital Analytics",
 			html: `
         <h2>Booking Cancelled</h2>
         <p>Hi ${clientName},</p>
@@ -288,7 +288,7 @@ export async function sendCancellationEmail(params: {
 }
 
 /**
- * Send free audit request notification to Charishma
+ * Send free audit request notification to the business owner
  * Alerts her when someone requests a free website audit
  */
 export async function sendAuditRequestNotification(params: {
@@ -482,7 +482,7 @@ export async function sendAuditConfirmation(params: {
                   Just reply to this email—we're real people and we love to chat!
                 </p>
                 <p style="margin: 15px 0 0 0; font-size: 14px; opacity: 0.8;">
-                  - The Cher Digital Analytics Team
+                  - The EarlyStage Digital Analytics Team
                 </p>
               </div>
             </div>

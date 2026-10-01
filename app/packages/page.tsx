@@ -57,7 +57,7 @@ export default function PackagesPage() {
 		{
 			name: "The Glow Starter",
 			icon: TrendingUp,
-			price: "$450",
+			price: "$400",
 			period: "/month",
 			description:
 				"Perfect for salons ready to shine online and attract local clients.",
@@ -68,14 +68,14 @@ export default function PackagesPage() {
 				"Website Landing Page Maintenance",
 				"Monthly Performance Monitoring",
 			],
-			setupOption: "Website Setup or Redesign: $800 one-time",
+			setupOption: "Website Setup or Redesign: $750 one-time",
 			color: "rose",
 			popular: false,
 		},
 		{
 			name: "The Digital Makeover",
 			icon: Sparkles,
-			price: "$850",
+			price: "$800",
 			period: "/month",
 			description: "For growing salons that want to turn clicks into clients.",
 			features: [
@@ -86,8 +86,8 @@ export default function PackagesPage() {
 				"Monthly Strategy Report + Consultation",
 			],
 			addOns: [
-				"Full Website Build: $900 one-time",
-				"Booking Integration: $100 setup",
+				"Full Website Build: $850 one-time",
+				"Booking Integration: $120 setup",
 			],
 			color: "burgundy",
 			popular: true,
@@ -95,7 +95,7 @@ export default function PackagesPage() {
 		{
 			name: "The Luxe Growth Suite",
 			icon: Crown,
-			price: "$1,200",
+			price: "$1,500",
 			period: "/month",
 			description: "For salons ready to scale, automate, and dominate locally.",
 			features: [
@@ -107,8 +107,8 @@ export default function PackagesPage() {
 				"Quarterly Growth Strategy Call",
 			],
 			addOns: [
-				"Automated Review Funnel: $100 setup",
-				"Premium Landing Page: $150/month",
+				"Automated Review Funnel: $125 setup",
+				"Premium Landing Page: $175/month",
 			],
 			color: "rose",
 			popular: false,
