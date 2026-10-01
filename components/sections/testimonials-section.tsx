@@ -50,9 +50,9 @@ export function TestimonialsSection() {
 		},
 		{
 			quote:
-				"As a small salon owner, I don't have time for complicated analytics. The email reports give me exactly what I need to know in plain English.",
+				"As a small business owner, I don't have time for complicated analytics. The email reports give me exactly what I need to know in plain English.",
 			author: "Tanya Williams",
-			business: "Radiance Hair Studio",
+			business: "Northside Bike Repair",
 			initials: "TW",
 		},
 	];

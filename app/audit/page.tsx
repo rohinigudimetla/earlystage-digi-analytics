@@ -225,7 +225,7 @@ export default function AuditPage() {
 												})
 											}
 											className="w-full px-4 py-3 rounded-2xl bg-charcoal/30 border border-rose/20 text-cream placeholder:text-cream/40 focus:outline-none focus:border-rose transition-colors"
-											placeholder="Your Salon Name"
+											placeholder="Your Business Name"
 											required
 										/>
 									</div>
@@ -303,9 +303,9 @@ export default function AuditPage() {
 								Why Get an Audit?
 							</h2>
 							<p className="text-base md:text-lg text-cream/70 leading-relaxed">
-								Most salons are losing clients because their website isn't
-								optimized for local search, mobile users, or conversions. Our
-								free audit shows you exactly where you're losing business—and
+								Most local businesses are losing customers because their website
+								isn't optimized for local search, mobile users, or conversions.
+								Our free audit shows you exactly where you're losing business—and
 								how to fix it. No fluff, no sales pitch, just actionable
 								insights you can use right away.
 							</p>

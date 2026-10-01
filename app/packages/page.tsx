@@ -55,12 +55,12 @@ export default function PackagesPage() {
 
 	const packages = [
 		{
-			name: "The Glow Starter",
+			name: "Essentials",
 			icon: TrendingUp,
 			price: "$400",
 			period: "/month",
 			description:
-				"Perfect for salons ready to shine online and attract local clients.",
+				"For local businesses ready to get found online and bring in nearby customers.",
 			features: [
 				"AI-Powered Google Business Profile Setup + Optimization",
 				"Local SEO & Keyword Strategy",
@@ -73,13 +73,14 @@ export default function PackagesPage() {
 			popular: false,
 		},
 		{
-			name: "The Digital Makeover",
+			name: "Growth",
 			icon: Sparkles,
 			price: "$800",
 			period: "/month",
-			description: "For growing salons that want to turn clicks into clients.",
+			description:
+				"For growing businesses that want to turn clicks into customers.",
 			features: [
-				"Everything in Glow Starter",
+				"Everything in Essentials",
 				"Google + Meta Ads Management (2 platforms)",
 				"Conversion Tracking Setup",
 				"Custom Website (Up to 3 Pages)",
@@ -93,13 +94,14 @@ export default function PackagesPage() {
 			popular: true,
 		},
 		{
-			name: "The Luxe Growth Suite",
+			name: "Full Suite",
 			icon: Crown,
 			price: "$1,500",
 			period: "/month",
-			description: "For salons ready to scale, automate, and dominate locally.",
+			description:
+				"For businesses ready to scale, automate, and lead their local market.",
 			features: [
-				"Everything in Digital Makeover",
+				"Everything in Growth",
 				"AI-Powered Ad Testing & Budget Optimization",
 				"Email + SMS Remarketing Setup",
 				"Advanced Local SEO + Review Strategy",
@@ -160,7 +162,7 @@ export default function PackagesPage() {
 						</h1>
 						<p className="text-base sm:text-lg md:text-xl text-cream/70 max-w-full md:max-w-3xl mx-auto leading-relaxed">
 							Transparent pricing. No hidden fees. No surprises. Just results
-							that fill your chairs.
+							you can measure.
 						</p>
 					</div>
 				</section>{" "}
@@ -259,7 +261,7 @@ export default function PackagesPage() {
 				<section className="py-12 md:py-32 px-6">
 					<div className="max-w-4xl mx-auto text-center">
 						<h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-cream mb-6 uppercase tracking-tight">
-							Ready to Grow Your Salon?
+							Ready to Grow Your Business?
 						</h2>
 						<p className="text-base sm:text-lg md:text-xl text-cream/70 mb-8 leading-relaxed">
 							Book a free consultation and get a complimentary site audit. No
