@@ -36,7 +36,7 @@ export function FAQSection() {
 		{
 			question: "How do I get started with EarlyStage?",
 			answer:
-				"Getting started with EarlyStage is simple — just book a free consultation through our website. We'll begin with a complimentary site audit to review your current online presence, identify opportunities, and outline a strategy tailored to your goals. Our services start at $400 per month, and we offer three transparent packages designed to fit different business sizes and growth stages. Each plan combines the right mix of local SEO, Google and Meta Ads, website maintenance, keyword optimization, and performance reporting — so you always know exactly what you're getting and paying for. At EarlyStage, we believe in clarity, results, and relationships, not lock-in contracts. You'll know every detail before we begin, and you'll see measurable progress every month.",
+				"Getting started with EarlyStage is simple — just book a free consultation through our website. We'll begin with a complimentary site audit to review your current online presence, identify opportunities, and outline a strategy tailored to your goals. Our services start at $400 per month, and we offer three transparent packages designed to fit different business sizes and growth stages. Each plan combines the right mix of analytics setup, conversion tracking, channel attribution, and plain-English reporting — so you always know exactly what you're getting and paying for. At EarlyStage, we believe in clarity, results, and relationships, not lock-in contracts. You'll know every detail before we begin, and you'll see measurable progress every month.",
 		},
 		{
 			question: "How will I receive my reports?",
