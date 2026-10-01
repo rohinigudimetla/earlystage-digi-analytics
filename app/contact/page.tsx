@@ -88,7 +88,7 @@ export default function ContactPage() {
 									Speak directly with our team
 								</p>
 								<p className="text-xl md:text-2xl font-bold text-cream">
-									(413) 377-8945
+									(555) 123-4567
 								</p>
 							</div>
 
@@ -103,7 +103,7 @@ export default function ContactPage() {
 									We'll respond within 24 hours
 								</p>
 								<p className="text-xl md:text-2xl font-bold text-cream break-all">
-									hello@cherdigitalanalytics.com
+									hello@earlystage-analytics.com
 								</p>
 							</div>
 						</div>

@@ -27,7 +27,7 @@ export default function PrivacyPage() {
 									Our Commitment to Privacy
 								</h2>
 								<p className="text-muted-foreground leading-relaxed mb-6">
-									At Cher Digital Analytics, we take your privacy seriously.
+									At EarlyStage Digital Analytics, we take your privacy seriously.
 									This privacy policy outlines how we collect, use, and protect
 									your information when you use our services.
 								</p>
@@ -68,10 +68,10 @@ export default function PrivacyPage() {
 									If you have questions about this privacy policy, please
 									contact us at{" "}
 									<a
-										href="mailto:hello@cherdigital.com"
+										href="mailto:hello@earlystage-analytics.com"
 										className="text-primary hover:underline"
 									>
-										hello@cherdigital.com
+										hello@earlystage-analytics.com
 									</a>{" "}
 									or call{" "}
 									<a

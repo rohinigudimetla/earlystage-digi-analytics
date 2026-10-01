@@ -43,7 +43,7 @@ export function TestimonialsSection() {
 		},
 		{
 			quote:
-				"Cher Digital's reports helped us see which Facebook ads actually brought people through our door. We cut our ad spend by 40%.",
+				"EarlyStage's reports helped us see which Facebook ads actually brought people through our door. We cut our ad spend by 35%.",
 			author: "James Park",
 			business: "Park's BBQ",
 			initials: "JP",

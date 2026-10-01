@@ -12,8 +12,8 @@ export default function Navbar() {
 		<nav className="sticky top-0 left-0 right-0 z-50 px-4 sm:px-6 md:px-12 py-4 md:py-6 flex items-center justify-between">
 			<Link href="/" className="relative z-50">
 				<Image
-					src="/cher (1)-cropped.svg"
-					alt="Cher Digital Analytics"
+					src="/logo.svg"
+					alt="EarlyStage Digital Analytics"
 					width={180}
 					height={60}
 					className="h-10 sm:h-12 md:h-14 w-auto"

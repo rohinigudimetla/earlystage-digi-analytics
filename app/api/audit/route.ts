@@ -10,7 +10,7 @@ import {
  *
  * This endpoint:
  * 1. Validates the form data
- * 2. Sends notification email to Charishma
+ * 2. Sends notification email to the business owner
  * 3. Sends confirmation email to the client
  */
 export async function POST(request: Request) {
@@ -52,7 +52,7 @@ export async function POST(request: Request) {
 			cofounderEmail: process.env.COFOUNDER_EMAIL,
 		});
 
-		// Send notification to Charishma
+		// Send notification to the business owner
 		await sendAuditRequestNotification({
 			businessName,
 			website,

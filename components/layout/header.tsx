@@ -21,7 +21,7 @@ export function Header() {
 						href="/"
 						className="text-2xl md:text-3xl font-bold tracking-tight text-cream hover:text-rose transition-colors"
 					>
-						Cher Digital
+						EarlyStage Digital
 					</Link>
 
 					<nav className="hidden md:flex items-center gap-8">

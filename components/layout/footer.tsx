@@ -11,7 +11,7 @@ export function Footer() {
 					{/* Brand */}
 					<div className="text-center sm:text-left">
 						<h3 className="text-xl md:text-2xl font-black text-cream mb-3 md:mb-4">
-							Cher Digital Analytics
+							EarlyStage Digital Analytics
 						</h3>
 						<p className="text-cream/60 text-sm leading-relaxed">
 							Empowering local brands with simple dashboards and actionable
@@ -67,11 +67,11 @@ export function Footer() {
 						</h4>
 						<ul className="space-y-2 md:space-y-3">
 							<li>
-								<span className="text-cream/80 text-sm">(413) 377-8945</span>
+								<span className="text-cream/80 text-sm">(555) 123-4567</span>
 							</li>
 							<li>
 								<span className="text-cream/80 text-sm">
-									hello@cherdigitalanalytics.com
+									hello@earlystage-analytics.com
 								</span>
 							</li>
 						</ul>
@@ -80,7 +80,7 @@ export function Footer() {
 
 				<div className="border-t border-cream/10 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4">
 					<p className="text-cream/40 text-xs text-center md:text-left">
-						© {new Date().getFullYear()} Cher Digital Analytics. All rights
+						© {new Date().getFullYear()} EarlyStage Digital Analytics. All rights
 						reserved.
 					</p>
 					<Link
